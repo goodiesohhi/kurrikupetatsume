@@ -1,0 +1,205 @@
+
+
+<body>
+
+ 
+
+ 
+  
+</body>
+
+<template name="home">
+
+    <h1 align="center">Welcome to Cute Things</h1>
+	<br>test
+	<br>test
+	<br>test
+	<br>test
+	<br>test
+	<br>test
+	<br>test<br>test<br>test<br>test<br>test<br>test<br>test<br>test<br>test<br>test<br>test<br>test<br>test<br>test<br>test<br>test<br>test<br>test<br>test<br>test<br>test<br>test<br>test<br>test
+	
+	
+</template>
+
+<template name="main">
+<div class="container box">
+<div class="row">
+<div class="col-sm-12">
+<div align="center">
+ <img  class="img-fluid" src="res/banner.png">
+ </div>
+ </div>
+</div>
+<div class="row">
+  
+  <div class="col-sm-12">{{>navigation}}</div>
+  
+</div>
+<div class="row ">
+  
+  <div class="col-sm-8 box">{{> yield}}</div>
+  <div class="col-sm-4 box">{{>Bot}}</div>
+</div>
+<div class="row">
+ <hr />
+    <p align="center">Copyright &copy; goodiesohhi</p>
+</div>
+    
+	
+
+
+    
+	</div>
+</template>
+
+<template name="register">
+    <h2>Register</h2>
+    <form class="register">
+	    <p>Username:<br> <input type="username" name="username" required></p>
+        <p>Email: <br><input type="email" name="email" required></p>
+		
+        <p>Password: <br><input type="password" name="password" required></p>
+        <p><input type="submit" value="Register"></p>
+    </form>
+</template>
+
+<template name="login">
+    <h2>Login</h2>
+    <form class="login">
+        <p>Email: <input type="email" name="email" required></p>
+        <p>Password: <input type="password" name="password" required></p>
+        <p><input type="submit" value="Login"></p>
+		<a class="nav-link" href="{{pathFor route='register'}}">Or Register</a>
+    </form>
+</template>
+
+<template name="navigation">
+
+<nav class="navbar navbar-inverse barthing">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span> 
+      </button>
+      <a class="navbar-brand" href="{{pathFor route='home'}}">Home</a>
+    </div>
+    <div class="collapse navbar-collapse" id="myNavbar">
+      <ul class="nav navbar-nav">
+         {{#if currentUser}}
+        <li> <a class="navbar-brand" href="{{pathFor route='mypets'}}">My Cute Things</a></li> 
+        <li> <a class="navbar-brand" href="{{pathFor route='Shop'}}">Shop</a></li> 
+        <li><a href="#">Page 3</a></li> 
+		{{/if}}
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+	  {{#if currentUser}}
+	  <li> <a href="#" class="logout">Logout</a></li>
+	   {{else}}
+    
+        <li><a class="nav-link" href="{{pathFor route='register'}}">Register</a></li>
+        <li><a class="nav-link" href="{{pathFor route='login'}}">Login</a></li>
+		{{/if}}
+      </ul>
+    </div>
+  </div>
+</nav>
+
+</template>
+
+<template name="loading">
+    <p>Loading...</p>
+</template>
+
+<template name="shop">
+<h1>Buy an Egg Your Geld: {{user.geld}} G</h1><br>
+
+ <input type="image" src="/egg.png" class="buy btn span2" id="100" value="Buy an Egg" />Cost: 100 G
+</template>
+
+<template name="Bot">
+<div class="row">
+  {{#if currentUser}}
+  <div class="col-sm-2">AlertBox:</div>
+  <div class="col-sm-10"><h1>{{user.msg}}</h1></div>
+  {{else}}
+  <div class="col-sm-12"><h1>Not Logged In.</h1><br><input type="image" src="cutethings/Leporine/1.png" /><a class="nav-link" href="{{pathFor route='login'}}">Login</a></div>
+  {{/if}}
+</div>
+</template>
+
+<template name="mypets">
+<ul class="nav nav-tabs">
+  <li class="active"><a data-toggle="tab" href="#common">Commons</a></li>
+  <li><a data-toggle="tab" href="#slc">Slightly Less Common</a></li>
+  <li><a data-toggle="tab" href="#rare">"Rare"</a></li>
+  <li><a data-toggle="tab" href="#suprare">Super Rare</a></li>
+  <li><a data-toggle="tab" href="#secrare">Secret Rare</a></li>
+</ul>
+
+<div class="tab-content">
+  <div id="common" class="tab-pane fade in active">
+    <h3>Commons</h3>
+    
+ 
+    {{#navybitsPagination data=commonpet}}
+	
+	{{>petbox}}
+
+		{{/navybitsPagination}}     
+
+	  
+	  
+  </div>
+  <div id="slc" class="tab-pane fade">
+    <h3>Slightly Less Commons</h3>
+   {{#navybitsPagination data=slcpet}}
+	 {{>petbox}}
+		{{/navybitsPagination}}     
+  </div>
+  <div id="rare" class="tab-pane fade">
+    <h3>"Rares"</h3>
+{{#navybitsPagination data=rarepet}}
+	
+      {{>petbox}}
+		{{/navybitsPagination}}     
+  </div>
+  <div id="suprare" class="tab-pane fade">
+    <h3>Super Rare</h3>
+    {{#navybitsPagination data=suppet}}
+	{{>petbox}}
+		{{/navybitsPagination}}     
+  </div>
+  <div id="secrare" class="tab-pane fade">
+    <h3>Secret Rare</h3>
+   {{#navybitsPagination data=secpet}}
+	
+     {{>petbox}}
+		{{/navybitsPagination}}     
+	    
+  </div>
+</div>
+
+	  
+
+</template>
+
+<template name="petbox">
+ <div class="otherbox">
+        {{#if isegg dex }} <img class="img-fluid" id={{_id}}  src="./cutethings/{{group}}/0.1.png"> {{else}} <img class="img-fluid" src="./cutethings/{{group}}/{{dex}}.{{forme}}.png"> {{/if}} Name:{{name}} Exp: {{exp}} Max Exp: {{#if notnumber max}}∞{{else}}{{max}} {{/if}} {{#if canevolve exp max }}  <img align = "right" class="evo" id={{_id}} src="./evolve.png"/>  {{else}}<img align = "right" class="int" id={{_id}} src="./interact.png"/>  {{/if}}
+ <br>
+
+ </div>
+</template>
+
+<template name="profile">
+
+{{#navybitsPagination data=viewpet}}
+	
+      {{>petbox}}
+		{{/navybitsPagination}}   
+</template>
+
+

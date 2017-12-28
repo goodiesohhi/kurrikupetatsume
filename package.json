@@ -1,0 +1,16 @@
+{
+  "name": "cutethings",
+  "private": true,
+  "scripts": {
+    "start": "meteor run"
+  },
+  "dependencies": {
+    "babel-runtime": "^6.26.0",
+    "bcrypt": "^1.0.3",
+    "bootstrap": "^3.3.7",
+    "bootstrap-sass": "^3.3.7",
+    "meteor-node-stubs": "^0.3.2",
+    "percent": "^2.0.0",
+    "random": "^1.0.0-beta-1"
+  }
+}

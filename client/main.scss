@@ -1,0 +1,62 @@
+
+@import "{}/node_modules/bootstrap-sass/assets/stylesheets/_bootstrap.scss";
+
+input.error{
+    background-color:rgb(255, 231, 231);
+}
+
+body, html {
+    height: 100%;
+}
+
+body { 
+    /* The image used */
+    background-image: url("./res/background.png");
+
+    /* Full height */
+    height: 100%; 
+
+    /* Center and scale the image nicely */
+ 
+    background-size: cover;
+	 
+}
+img{
+max-width: 100%;
+height: auto;
+}
+
+.box {
+background-image: url("./res/box.png");
+  height: 100%; 
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+	
+	  border: 2px solid black;
+    border-radius: 10px;
+}
+.otherbox {
+background-image: url("./res/box.png");
+  height: 100%; 
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+	
+	  border: 2px solid black;
+   border-top-style: solid;
+    border-right-style: none;
+    border-bottom-style: solid;
+    border-left-style: none;
+	
+	}
+
+.barthing {
+background-image: url("./res/bar.png");
+  height: 100%; 
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+	 background-attachment: fixed;
+}
+
