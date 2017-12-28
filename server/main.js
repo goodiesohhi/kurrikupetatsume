@@ -83,7 +83,7 @@ Meteor.methods({
 	  var currentUser = Meteor.userId();
 	  var target= cutethings.findOne( {_id:id } )
 	  
-	   var next= evogroups[target.groupnumber-1][target.rarity-1][target.evo]
+	   var next= evogroups[target.groupnumber-1][target.evo]
 	   if(key!=supersecretkey) {
 			throw new Meteor.Error("consolemanipulation", "Anomaly Detected.");
 		}
@@ -115,7 +115,8 @@ Meteor.methods({
           'geld': (100),
         },
 		 $set: {
-        'msg': "Evolution Succesful",
+        'msg': "Evolution Succesful. "+next.name+" Get!",
+		'recent': "./cutethings/"+next.group+"/"+next.dex+"."+target.forme
         
 
       },
@@ -139,10 +140,11 @@ Meteor.methods({
 			throw new Meteor.Error("consolemanipulation", "Anomaly Detected.");
 		}
 		
-		if(!group) {
+		if(isNaN(group)) {
 			group= getRandomInt(1,groups.length)
+			
 		}
-    console.log(group)
+    
     if (Meteor.user().geld >= amount && amount > 0){
 		var currentUser = Meteor.userId();
 		

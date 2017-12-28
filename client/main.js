@@ -5,6 +5,7 @@ import './main.html';
 import 'bootstrap-sass';
 $(".navbar-toggle").click();
 
+
  Meteor.subscribe('userData');
  Template.Bot.user = function() {
     return Meteor.user();
@@ -106,9 +107,18 @@ Shop TEMPLATE
     'click input.buy': function(event) {
      key = cutethings.findOne( {_id:"veryimportantbunny"} ).key
 	
-      Meteor.call('buy', event.target.id,0,1,key);
+      Meteor.call('buy', 100,0,NaN,key);
+	  
     }
   });
+  Template.msgbox.helpers(
+  {
+	  user:function(){
+		    return Meteor.user();
+	  },
+  }
+  
+  );
   
   Template.shop.helpers(
   {
@@ -187,14 +197,26 @@ Template.profile.helpers({
 Template.mypets.helpers({
 	
 	
- commonpet:function(){
-   
-    common=cutethings.find({
+ eggs:function(){
+	 
+	
+    eggs=cutethings.find({
       "user": Meteor.userId(),
-	  'rarity': 1,
+	  
+	   'dex':0
     }).fetch();
+   
+    
 
 	
+	return eggs
+ },
+ commonpet:function(){
+	 common=cutethings.find({
+      "user": Meteor.userId(),
+	  'rarity': 1,
+	   'dex': {$gt: 0}
+    }).fetch();
 	return common
  },
   slcpet:function(){
@@ -202,6 +224,7 @@ Template.mypets.helpers({
     return cutethings.find({
       "user": Meteor.userId(),
 	  'rarity': 2,
+	      'dex': {$gt: 0}
     }).fetch();
  },
   rarepet:function(){
@@ -209,6 +232,7 @@ Template.mypets.helpers({
     return cutethings.find({
       "user": Meteor.userId(),
 	  'rarity': 3,
+	     'dex': {$gt: 0}
     }).fetch();
  },
   suppet:function(){
@@ -216,13 +240,16 @@ Template.mypets.helpers({
     return cutethings.find({
       "user": Meteor.userId(),
 	  'rarity': 4,
+	     'dex': {$gt: 0}
     }).fetch();
+	
  },
   secpet:function(){
     
     return cutethings.find({
       "user": Meteor.userId(),
 	  'rarity': 5,
+	     'dex': {$gt: 0}
     }).fetch();
  },
  

@@ -23,7 +23,7 @@
 </template>
 
 <template name="main">
-<div class="container box">
+<div class="container">
 <div class="row">
 <div class="col-sm-12">
 <div align="center">
@@ -36,21 +36,24 @@
   <div class="col-sm-12">{{>navigation}}</div>
   
 </div>
-<div class="row ">
-  
-  <div class="col-sm-8 box">{{> yield}}</div>
-  <div class="col-sm-4 box">{{>Bot}}</div>
+<div class="row">
+
+   <div class="col-sm-4 otherbox">{{>Bot}}<br>{{>msgbox}}</div>
+  <div class="col-sm-8 otherbox">{{> yield}}</div>
+
 </div>
 <div class="row">
  <hr />
+ <div class="col-sm-12">
     <p align="center">Copyright &copy; goodiesohhi</p>
+	</div>
 </div>
-    
+    </div>
 	
 
 
     
-	</div>
+	
 </template>
 
 <template name="register">
@@ -132,7 +135,8 @@
 
 <template name="mypets">
 <ul class="nav nav-tabs">
-  <li class="active"><a data-toggle="tab" href="#common">Commons</a></li>
+<li class="active"><a data-toggle="tab" href="#eggs">Eggs</a></li>
+  <li><a data-toggle="tab" href="#common">Commons</a></li>
   <li><a data-toggle="tab" href="#slc">Slightly Less Common</a></li>
   <li><a data-toggle="tab" href="#rare">"Rare"</a></li>
   <li><a data-toggle="tab" href="#suprare">Super Rare</a></li>
@@ -140,7 +144,20 @@
 </ul>
 
 <div class="tab-content">
-  <div id="common" class="tab-pane fade in active">
+  <div id="eggs" class="tab-pane fade in active">
+    <h3>Eggs</h3>
+    
+ 
+    {{#navybitsPagination data=eggs}}
+	
+	{{>petbox}}
+
+		{{/navybitsPagination}}     
+
+	  
+	  
+  </div>
+  <div id="common" class="tab-pane fade">
     <h3>Commons</h3>
     
  
@@ -188,7 +205,19 @@
 
 <template name="petbox">
  <div class="otherbox">
-        {{#if isegg dex }} <img class="img-fluid" id={{_id}}  src="./cutethings/{{group}}/0.1.png"> {{else}} <img class="img-fluid" src="./cutethings/{{group}}/{{dex}}.{{forme}}.png"> {{/if}} Name:{{name}} Exp: {{exp}} Max Exp: {{#if notnumber max}}∞{{else}}{{max}} {{/if}} {{#if canevolve exp max }}  <img align = "right" class="evo" id={{_id}} src="./evolve.png"/>  {{else}}<img align = "right" class="int" id={{_id}} src="./interact.png"/>  {{/if}}
+        {{#if isegg dex }} <img class="img-fluid" id={{_id}}  src="./cutethings/{{group}}/0.1.png"> 
+		{{else}} <img class="img-fluid" src="./cutethings/{{group}}/{{dex}}.{{forme}}.png"> 
+		{{/if}}
+		
+		
+		Name:{{name}} Exp: {{exp}} Max Exp: {{#if notnumber max}}∞{{else}}{{max}} {{/if}} 
+		{{#if notnumber evo}}Final Form <img align = "right" class="int" id={{_id}} src="./interact.png"/>
+		{{else}}
+		{{#if canevolve exp max }}  <img align = "right" class="evo" id={{_id}} src="./evolve.png"/>{{else}}
+		<img align = "right" class="int" id={{_id}} src="./interact.png"/>  
+		 {{/if}} 
+		 {{/if}}
+		
  <br>
 
  </div>
@@ -201,5 +230,10 @@
       {{>petbox}}
 		{{/navybitsPagination}}   
 </template>
-
+<template name="msgbox">
+<div align="center" class="otherbox">
+<p>Most Recent:</p>
+<img class="img-fluid" src="{{user.recent}}.png">
+</div>
+</template>
 
