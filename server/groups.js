@@ -66,7 +66,17 @@ evogroups=[evoleporine,evoreptile];
 //petscripts
 
  petscripts = {
-  Bunnyball: function () {   return getRandomInt(1,6); },
+  Bunnyball: function () {   
+  gen1 = getRandomInt(1,5)
+  gen2 = getRandomInt(1,5)
+  gen3 = getRandomInt(1,5)
+  if (gen1==gen2&&gen2==gen3){
+  return getRandomInt(6);
+  } else {
+	  return gen3;
+  }
+
+  },
   Serpentine: function () {return 1; },
   Snek: function () {return 1;  },
   placeholder4: function () { alert('Function 4'); },
