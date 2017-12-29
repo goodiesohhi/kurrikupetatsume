@@ -116,7 +116,7 @@ Meteor.methods({
         },
 		 $set: {
         'msg': "Evolution Succesful. "+next.name+" Get!",
-		'recent': "./cutethings/"+next.group+"/"+next.dex+"."+target.forme
+		'recent': "/cutethings/"+next.group+"/"+next.dex+"."+target.forme
         
 
       },
