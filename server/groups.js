@@ -14,9 +14,28 @@ fanguine = {group:"reptile", dex:4,name:"Fanguine",evo:'5',exp:0,max:300,rarity:
 dracihpo = {group:"reptile", dex:5,name:"Dracihpo",evo:'6',exp:0,max:1200,rarity:5,gnumber:2};
 ophicard = {group:"reptile", dex:6,name:"Ophicard",evo:'none',exp:0,max:NaN,rarity:5,gnumber:2};
 
+//avian
+avianegg = {group:"avian", dex:0,name:"Birdie Egg",evo:0,exp:0,max:60,rarity:1,gnumber:3};
+turken = {group:"avian", dex:1,name:"Turken",evo:2,exp:0,max:100,rarity:1,gnumber:3};
+grouster = {group:"avian", dex:2,name:"Grouster",evo:3,exp:0,max:300,rarity:1,gnumber:3};
+peacockatrice= {group:"avian", dex:3,name:"Peacockatrice",evo:'none',exp:0,max:NaN,rarity:1,gnumber:3};
 
-egggroup= [bunnyegg,reptileegg]
+
+egggroup= [bunnyegg,reptileegg,avianegg]
 //placements
+
+avian=[
+//rare1
+[turken,],
+//rare2
+[turken,],
+//rare3
+[turken,],
+//rare4
+[turken,],
+//rare5
+[turken,],
+];
 
 leporine=[
 //rare1
@@ -48,7 +67,7 @@ reptile=[
 
 
 
-groups=[leporine,reptile];
+groups=[leporine,reptile,avian];
 
 
 //evos
@@ -61,10 +80,17 @@ bunnyegg,bunnyball,ballooney,rabblimp,
 ];
 
 evoreptile=[
-reptileegg,serpentine,boweniteconstrictor,snek,fanguine,dracihpo,ophicard
+reptileegg,serpentine,boweniteconstrictor,snek,fanguine,dracihpo,ophicard,
 ];
 
-evogroups=[evoleporine,evoreptile];
+
+
+evoavian=[
+avianegg,turken,grouster,peacockatrice,
+];
+
+
+evogroups=[evoleporine,evoreptile,evoavian];
 
 //petscripts
 
@@ -83,7 +109,7 @@ evogroups=[evoleporine,evoreptile];
   Serpentine: function () {return 1; },
   Snek: function () {return 1;  },
   Fanguine: function () { return 1; },
-  placeholder5: function () { alert('Function 5'); }
+  Turken: function () { return 1; },
 };
 
 function getRandomInt(min, max) {
