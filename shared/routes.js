@@ -54,4 +54,23 @@ Router.route('/shop', {
     }
 });
 
+Router.route('/breed', {
+    name: 'Breeding',
+    template: 'Breeding',
+   
+    onBeforeAction: function(){
+        var currentUser = Meteor.userId();
+        if(currentUser){
+            this.next();
+        } else {
+            this.render("login");
+        }
+    },
+	  subscriptions: function(){
+          Meteor.subscribe('mypets');
+    }
+});
+
 cutethings = new Mongo.Collection('cutethings');
+
+breeding = new Mongo.Collection('breeding');

@@ -223,6 +223,23 @@
  </div>
 </template>
 
+<template name="petselect">
+ <div class="otherbox">
+         <img class="img-fluid" src="/cutethings/{{group}}/{{dex}}.{{forme}}.png"> 
+	
+		
+		
+		Name:{{name}} 
+		
+		<button onclick="pet.push('{{_id}}');">Select</button>
+
+		 
+		
+ <br>
+
+ </div>
+</template>
+
 <template name="profile">
 
 {{#navybitsPagination data=viewpet}}
@@ -236,4 +253,15 @@
 <img class="img-fluid" src="{{user.recent}}.png">
 </div>
 </template>
+
+<template name="Breeding">
+{{#navybitsPagination data=breedpet}}
+	
+      {{>petselect}}
+		{{/navybitsPagination}}   
+		
+		<input type="image" src="/egg.png" class="set btn span2" value="Buy an Egg" />
+</template>
+
+
 

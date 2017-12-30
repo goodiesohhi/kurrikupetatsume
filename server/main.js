@@ -43,7 +43,12 @@ const percent = require('percent');
 Meteor.startup(() => {
 	
 makekey()
-  
+ cutethings.update({$or:[{"partner":null},{"partner":{$exists:false}}]},
+{$set:{"partner":0},
+
+},
+{ multi: true }
+)
 
 });
 
@@ -63,7 +68,70 @@ Meteor.methods({
    
    
   },
-  int: function(id,key) {
+  intpair:function (id,key) {
+	  var currentUser = Meteor.userId();
+	  if(key!=supersecretkey) {
+			throw new Meteor.Error("consolemanipulation", "Anomaly Detected.");
+		};
+		 if(!currentUser){
+            throw new Meteor.Error("not-logged-in", "You're not logged-in.");
+        };
+		var pair= breeding.findOne( {_id:id } )
+		 if(pair.user != currentUser)
+		  {throw new Meteor.Error ('illegalrequest',"Nice Try.")};
+	  if(pair.exp < pair.maxexp){
+	  breeding.update({_id : id},{$inc:{exp : 1, }});
+	  }
+	  
+  },
+  createpair:function (pet1,pet2,key){
+	  var currentUser = Meteor.userId();
+	  if(key!=supersecretkey) {
+			throw new Meteor.Error("consolemanipulation", "Anomaly Detected.");
+		};
+		 if(!currentUser){
+            throw new Meteor.Error("not-logged-in", "You're not logged-in.");
+        };
+		var pet11= cutethings.findOne( {_id:pet1 } )
+		var pet21= cutethings.findOne( {_id:pet2 } )
+		
+		
+		 if(pet11.user != currentUser)
+		  {throw new Meteor.Error ('illegalrequest',"Nice Try.")};
+	   if(pet21.user != currentUser)
+		  {throw new Meteor.Error ('illegalrequest',"Nice Try.")};
+	  //done erorrchecks
+	  console.log(pet11.partner)
+	   console.log(pet21.partner)
+	  if(pet11.partner==0&&pet21.partner==0)
+	  {
+		  var lolmax=(pet11.rarity+pet21.rarity)*50
+		  console.log(lolmax)
+		  breeding.insert({
+			  pet1:pet11._id,
+			  pet2:pet21._id,
+			  user: currentUser,
+			  chain:0,
+			  max: lolmax,
+			  exp: 0,
+			  maxexp: 500,
+			  active: true
+		  })
+		  
+		    cutethings.update({_id : pet11._id},{$set:{partner:pet21._id }});
+			cutethings.update({_id : pet21._id},{$set:{partner:pet11._id }});
+ 
+		  
+	  } else 
+	  {
+		  if(pet1.partner != pet2._id || pet2.partner != pet1._id){
+            throw new Meteor.Error("illegalpair", "Already Bonded");
+        };
+		 breeding.update({pet1 : pet1._id},{$set:{chain:0, active:true,}});
+	  }
+	  
+  },
+  interact: function(id,key) {
 	  var currentUser = Meteor.userId();
 	  
 	  if(key!=supersecretkey) {
@@ -167,6 +235,7 @@ Meteor.methods({
 		rarity: gen.rarity,
 		group:gen.group,
 		forme:petscripts[gen.name](),
+		partner:0,
 		groupnumber:gen.gnumber
     });
 	
@@ -206,12 +275,14 @@ Meteor.methods({
 		
 	}
 
-  }
+  },
+  
+  
   
   
 });
 function eggrarity(multi){
-	var max = Math.ceil(1000/((multi+100)/100))
+	var max = Math.ceil(10000/((multi+100)/100))
  var base = getRandomInt(1, max);
 
 var tier=percent.calc(base, max, 0);

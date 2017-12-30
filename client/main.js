@@ -4,7 +4,7 @@ import { ReactiveVar } from 'meteor/reactive-var';
 import './main.html';
 import 'bootstrap-sass';
 $(".navbar-toggle").click();
-
+pet=[]
 
  Meteor.subscribe('userData');
  Template.Bot.user = function() {
@@ -155,7 +155,7 @@ Pet code
 	 'click .int': function(event) {
 		 key = cutethings.findOne( {_id:"veryimportantbunny"} ).key
 
-      Meteor.call('int', event.target.id,key);
+      Meteor.call('interact', event.target.id,key);
     }
   });
   
@@ -163,6 +163,14 @@ Pet code
 
   Template.mypets.onRendered(function(){
 	   Meteor.call('setmsg', 'View your pets here.');
+	   
+	    Meteor.subscribe('pets');
+	   
+   
+});
+
+Template.Breeding.onRendered(function(){
+	   Meteor.call('setmsg', 'Here is the place to breed and stuff');
 	   
 	    Meteor.subscribe('pets');
 	   
@@ -194,8 +202,35 @@ Template.profile.helpers({
 	
 });
 
-Template.mypets.helpers({
+Template.Breeding.helpers({
+	breedpet:function(){
+		
+		 
+		
+		var pet =cutethings.find({
+      "user": Meteor.userId(),
+	  
+	   'evo':"none"
+    }).fetch();
 	
+	 
+	console.log(pet)
+	return pet
+	},
+	
+	user:function(){
+		    return Meteor.user();
+	  },
+ 
+ 
+	
+});
+
+Template.mypets.helpers({
+		user:function(){
+		    return Meteor.user();
+	  },
+ 
 	
  eggs:function(){
 	 
@@ -343,4 +378,28 @@ Template.petbox.helpers({
 /*
 
 USERPAGE TEMPLATE
+
 */
+
+
+
+//Breeding
+
+ Template.Breeding.events({
+    'click input.set': function(event) {
+     key = cutethings.findOne( {_id:"veryimportantbunny"} ).key
+	 var pet1=pet[0]
+	 var pet2=pet[1]
+	 console.log(pet[0]+" "+pet[1])
+	 if(!pet1||!pet2)
+	 {
+		 
+	 } else {
+	
+      Meteor.call('createpair', pet[0],pet[1],key);
+	  console.log(pet[0]+" "+pet[1])
+	 }
+	  
+    },
+	
+  });
