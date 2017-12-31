@@ -20,8 +20,13 @@ turken = {group:"avian", dex:1,name:"Turken",evo:2,exp:0,max:100,rarity:1,gnumbe
 grouster = {group:"avian", dex:2,name:"Grouster",evo:3,exp:0,max:300,rarity:1,gnumber:3};
 peacockatrice= {group:"avian", dex:3,name:"Peacockatrice",evo:'none',exp:0,max:NaN,rarity:1,gnumber:3};
 
+//fishies
+fishyegg = {group:"fishies", dex:0,name:"Fishy Egg",evo:0,exp:0,max:50,rarity:1,gnumber:4};
+phish = {group:"fishies", dex:1,name:"Phish",evo:2,exp:0,max:120,rarity:1,gnumber:4};
+finposter = {group:"fishies", dex:2,name:"Finposter",evo:3,exp:0,max:809,rarity:1,gnumber:4};
+ripoff = {group:"fishies", dex:3,name:"Ripoff",evo:'none',exp:0,max:NaN,rarity:1,gnumber:4};
 
-egggroup= [bunnyegg,reptileegg,avianegg]
+egggroup= [bunnyegg,reptileegg,avianegg,fishyegg]
 //placements
 
 avian=[
@@ -35,6 +40,19 @@ avian=[
 [turken,],
 //rare5
 [turken,],
+];
+
+fishies=[
+//rare1
+[phish,],
+//rare2
+[phish,],
+//rare3
+[phish,],
+//rare4
+[phish,],
+//rare5
+[phish,],
 ];
 
 leporine=[
@@ -67,7 +85,7 @@ reptile=[
 
 
 
-groups=[leporine,reptile,avian];
+groups=[leporine,reptile,avian,fishies];
 
 
 //evos
@@ -76,6 +94,12 @@ groups=[leporine,reptile,avian];
 evoleporine=[
 //rare1
 bunnyegg,bunnyball,ballooney,rabblimp,
+
+];
+
+evofishies=[
+//rare1
+fishyegg,phish,finposter,ripoff,
 
 ];
 
@@ -90,7 +114,7 @@ avianegg,turken,grouster,peacockatrice,
 ];
 
 
-evogroups=[evoleporine,evoreptile,evoavian];
+evogroups=[evoleporine,evoreptile,evoavian,evofishies];
 
 //petscripts
 
@@ -99,8 +123,8 @@ evogroups=[evoleporine,evoreptile,evoavian];
   gen1 = getRandomInt(1,5)
   gen2 = getRandomInt(1,5)
   gen3 = getRandomInt(1,5)
-  if (gen1==gen2&&gen2==gen3){
-  return getRandomInt(6);
+  if (gen1==5&&gen2==gen1&&gen2==gen3){
+  return 6;
   } else {
 	  return gen3;
   }
@@ -110,6 +134,7 @@ evogroups=[evoleporine,evoreptile,evoavian];
   Snek: function () {return 1;  },
   Fanguine: function () { return 1; },
   Turken: function () { return 1; },
+  Phish: function () { return 1; },
 };
 
 function getRandomInt(min, max) {
