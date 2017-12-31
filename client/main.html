@@ -92,9 +92,9 @@
     <div class="collapse navbar-collapse" id="myNavbar">
       <ul class="nav navbar-nav">
          {{#if currentUser}}
-        <li> <a class="navbar-brand" href="/mypets">My Cute Things</a></li> 
+        <li> <a class="navbar-brand" href="/mypets">My Pets</a></li> 
         <li> <a class="navbar-brand" href="/shop">Shop</a></li> 
-        
+         <li> <a class="navbar-brand" href="/breed">Breeding</a></li> 
 		{{/if}}
       </ul>
       <ul class="nav navbar-nav navbar-right">
@@ -210,7 +210,7 @@
 		{{/if}}
 		
 		
-		Name:{{name}} Exp: {{exp}} Max Exp: {{#if notnumber max}}∞{{else}}{{max}} {{/if}} 
+		Name:{{name}} Exp: {{exp}}/{{#if notnumber max}}∞{{else}}{{max}} {{/if}} 
 		{{#if notnumber evo}}Final Form <img align = "right" class="int" id={{_id}} src="/interact.png"/>
 		{{else}}
 		{{#if canevolve exp max }}  <img align = "right" class="evo" id={{_id}} src="/evolve.png"/>{{else}}
@@ -262,12 +262,12 @@
       <div class="otherbox">
 	  
 	 
-		 <img class="img-fluid" src="/cutethings/{{img1}}.png"> <img class="img-fluid" src="/cutethings/{{img2}}.png">  Exp: {{exp}} Max Exp: {{maxexp}} Egg Chain: {{chain}}/{{max}}
-		{{#if maxed exp maxexp }}
+		 <img class="img-fluid flipped" src="/cutethings/{{img1}}.png"><img class="img-fluid" src="heart.png"> <img class="img-fluid" src="/cutethings/{{img2}}.png"> {{#if maxed exp maxexp }}
 		 <img align = "right" class="recieve" id={{_id}} src="/recieve.png"/> 
 	  {{else}}
 		 <img align = "right" class="intpair" id={{_id}} src="/interact.png"/>  
-		{{/if}}
+		{{/if}}<br> Egg Progress: {{exp}}/{{maxexp}} Egg Chain: {{chain}}/{{max}}
+		
 		</div>
 		{{/navybitsPagination}}   
 		
