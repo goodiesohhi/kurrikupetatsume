@@ -255,12 +255,34 @@
 </template>
 
 <template name="Breeding">
+{{#if pair}}
+<h1>Your Breeding Pairs</h1>
+{{#navybitsPagination data=pair}}
+	
+      <div class="otherbox">
+	  
+	 
+		 <img class="img-fluid" src="/cutethings/{{img1}}.png"> <img class="img-fluid" src="/cutethings/{{img2}}.png">  Exp: {{exp}} Max Exp: {{maxexp}} Egg Chain: {{chain}}/{{max}}
+		{{#if maxed exp maxexp }}
+		 <img align = "right" class="recieve" id={{_id}} src="/recieve.png"/> 
+	  {{else}}
+		 <img align = "right" class="intpair" id={{_id}} src="/interact.png"/>  
+		{{/if}}
+		</div>
+		{{/navybitsPagination}}   
+		
+{{else}}
+
+<h1>Select 2 Pets to create a breeding pair</h1>
 {{#navybitsPagination data=breedpet}}
 	
       {{>petselect}}
 		{{/navybitsPagination}}   
+		<input type="image" src="/submit.png" class="set btn span2" value="Buy an Egg" /> 
 		
-		<input type="image" src="/egg.png" class="set btn span2" value="Buy an Egg" />
+		{{/if}}
+		
+		
 </template>
 
 

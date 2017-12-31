@@ -34,6 +34,11 @@ const percent = require('percent');
     return cutethings.find({ user: currentUser });
 });
 
+  Meteor.publish('mypairs', function(){
+   
+    return breeding.find();
+});
+
  Meteor.publish('pets', function(){
    
       return cutethings.find();
@@ -68,11 +73,73 @@ Meteor.methods({
    
    
   },
+  recieve:function (id,key) {
+	  var currentUser = Meteor.userId();
+	  var pair= breeding.findOne( {_id:id } )
+	 //  if(key!=supersecretkey) {
+		//	throw new Meteor.Error("consolemanipulation", "Anomaly Detected.");
+		//};
+		 if(!currentUser){
+            throw new Meteor.Error("not-logged-in", "You're not logged-in.");
+        };
+  if(pair.exp >= pair.maxexp){
+		
+		 if(pair.user != currentUser)
+		 {throw new Meteor.Error ('illegalrequest',"Nice Try.")};
+	  
+	   
+	  	  var rare=eggrarity(pair.chain)-1
+		  
+		  var egggroup2 = []
+		  egggroup2.push(cutethings.findOne( {_id:pair.pet1 } ).groupnumber)
+		  egggroup2.push(cutethings.findOne( {_id:pair.pet2 } ).groupnumber)
+		  gengroup= egggroup2[getRandomInt(0,1)]
+	
+	  var gen= groups[gengroup-1][rare][getRandomInt(0, groups[gengroup-1][rare].length-1)]
+	  
+	  var gegg= egggroup[gengroup-1]
+	  
+	 
+	  
+	  cutethings.insert({
+		dex: 0,
+		nick: "Egg",
+        name: cfl(gen.group)+" Egg",
+        user: currentUser,
+		evo: gen.dex,
+		exp:0,
+		max:gegg.max+getRandomInt(Math.ceil(-0.25*gegg.max),Math.ceil(0.25*gegg.max)),
+		egg:true,
+		rarity: gen.rarity,
+		group:gen.group,
+		forme:petscripts[gen.name](),
+		partner:0,
+		groupnumber:gen.gnumber
+    });
+	if (pair.max>pair.chain) {
+	 breeding.update({_id : id},
+	 {$inc:{ exp: -1*pair.maxexp, chain : 1, maxexp: Math.ceil(pair.maxexp*0.25) ,}
+	 
+	 },
+	 {$set:{exp:0,}}
+	 );
+	 
+	
+  }
+	} else {
+		
+		 breeding.update({_id : id},
+	 
+	 {$set:{exp:0,}}
+	 );
+		
+	}
+  },
   intpair:function (id,key) {
 	  var currentUser = Meteor.userId();
-	  if(key!=supersecretkey) {
-			throw new Meteor.Error("consolemanipulation", "Anomaly Detected.");
-		};
+	  //if(key!=supersecretkey) {
+		//	throw new Meteor.Error("consolemanipulation", "Anomaly Detected.");
+		//};
 		 if(!currentUser){
             throw new Meteor.Error("not-logged-in", "You're not logged-in.");
         };
@@ -86,9 +153,9 @@ Meteor.methods({
   },
   createpair:function (pet1,pet2,key){
 	  var currentUser = Meteor.userId();
-	  if(key!=supersecretkey) {
-			throw new Meteor.Error("consolemanipulation", "Anomaly Detected.");
-		};
+	  //if(key!=supersecretkey) {
+		//	throw new Meteor.Error("consolemanipulation", "Anomaly Detected.");
+		//};
 		 if(!currentUser){
             throw new Meteor.Error("not-logged-in", "You're not logged-in.");
         };
@@ -96,20 +163,23 @@ Meteor.methods({
 		var pet21= cutethings.findOne( {_id:pet2 } )
 		
 		
-		 if(pet11.user != currentUser)
+		if(pet11.user != currentUser)
 		  {throw new Meteor.Error ('illegalrequest',"Nice Try.")};
 	   if(pet21.user != currentUser)
 		  {throw new Meteor.Error ('illegalrequest',"Nice Try.")};
 	  //done erorrchecks
-	  console.log(pet11.partner)
-	   console.log(pet21.partner)
+	
+	 
 	  if(pet11.partner==0&&pet21.partner==0)
 	  {
 		  var lolmax=(pet11.rarity+pet21.rarity)*50
-		  console.log(lolmax)
+		  
 		  breeding.insert({
 			  pet1:pet11._id,
 			  pet2:pet21._id,
+			  img1: pet11.group+"/"+pet11.dex+"."+pet11.forme,
+			  img2: pet21.group+"/"+pet21.dex+"."+pet21.forme,
+			 
 			  user: currentUser,
 			  chain:0,
 			  max: lolmax,
@@ -134,9 +204,9 @@ Meteor.methods({
   interact: function(id,key) {
 	  var currentUser = Meteor.userId();
 	  
-	  if(key!=supersecretkey) {
-			throw new Meteor.Error("consolemanipulation", "Anomaly Detected.");
-		};
+	 // if(key!=supersecretkey) {
+		//	throw new Meteor.Error("consolemanipulation", "Anomaly Detected.");
+		//};
 	  if(!currentUser){
             throw new Meteor.Error("not-logged-in", "You're not logged-in.");
         };
@@ -152,9 +222,9 @@ Meteor.methods({
 	  var target= cutethings.findOne( {_id:id } )
 	  
 	   var next= evogroups[target.groupnumber-1][target.evo]
-	   if(key!=supersecretkey) {
-			throw new Meteor.Error("consolemanipulation", "Anomaly Detected.");
-		}
+	//   if(key!=supersecretkey) {
+		//	throw new Meteor.Error("consolemanipulation", "Anomaly Detected.");
+		//}
 	   if(!currentUser){
             throw new Meteor.Error("not-logged-in", "You're not logged-in.");
         };
@@ -204,9 +274,9 @@ Meteor.methods({
 	   if(!currentUser){
             throw new Meteor.Error("not-logged-in", "You're not logged-in.");
         }
-		if(key!=supersecretkey) {
-			throw new Meteor.Error("consolemanipulation", "Anomaly Detected.");
-		}
+	//	if(key!=supersecretkey) {
+		//	throw new Meteor.Error("consolemanipulation", "Anomaly Detected.");
+		//}
 		
 		if(isNaN(group)) {
 			group= getRandomInt(1,groups.length)
@@ -221,7 +291,7 @@ Meteor.methods({
 	
 	  var gen= groups[group-1][rare][getRandomInt(0, groups[group-1][rare].length-1)]
 	  var gegg= egggroup[group-1]
-	  console.log(gen)
+	 
 	  
 	  cutethings.insert({
 		dex: 0,
@@ -300,7 +370,7 @@ else if (tier >= 50&& tier < 75){
 else {
 	return 1
 }
-///
+//
  
 };
 

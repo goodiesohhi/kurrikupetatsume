@@ -173,6 +173,8 @@ Template.Breeding.onRendered(function(){
 	   Meteor.call('setmsg', 'Here is the place to breed and stuff');
 	   
 	    Meteor.subscribe('pets');
+		
+	    Meteor.subscribe('mypairs');
 	   
    
 });
@@ -203,6 +205,10 @@ Template.profile.helpers({
 });
 
 Template.Breeding.helpers({
+	
+maxed:function(data,data2){
+	 return data>=data2;
+ },
 	breedpet:function(){
 		
 		 
@@ -214,7 +220,22 @@ Template.Breeding.helpers({
     }).fetch();
 	
 	 
-	console.log(pet)
+	
+	return pet
+	},
+	
+	pair:function(){
+		
+		 
+		
+		var pet = breeding.find({
+      "user": Meteor.userId(),
+	  
+	  
+    }).fetch();
+
+	 
+	
 	return pet
 	},
 	
@@ -390,16 +411,28 @@ USERPAGE TEMPLATE
      key = cutethings.findOne( {_id:"veryimportantbunny"} ).key
 	 var pet1=pet[0]
 	 var pet2=pet[1]
-	 console.log(pet[0]+" "+pet[1])
+	 
 	 if(!pet1||!pet2)
 	 {
 		 
 	 } else {
 	
       Meteor.call('createpair', pet[0],pet[1],key);
-	  console.log(pet[0]+" "+pet[1])
+	 
 	 }
 	  
     },
+	
+	 'click .intpair': function(event) {
+		 key = cutethings.findOne( {_id:"veryimportantbunny"} ).key
+
+      Meteor.call('intpair', event.target.id,key);
+    },
+	
+	'click .recieve': function(event) {
+		 key = cutethings.findOne( {_id:"veryimportantbunny"} ).key
+
+      Meteor.call('recieve', event.target.id,key);
+    }
 	
   });

@@ -68,6 +68,8 @@ Router.route('/breed', {
     },
 	  subscriptions: function(){
           Meteor.subscribe('mypets');
+		  Meteor.subscribe('mypairs');
+		  
     }
 });
 
