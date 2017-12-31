@@ -54,6 +54,13 @@ Router.route('/shop', {
     }
 });
 
+Router.route('/players', {
+    name: 'players',
+    template: 'players',
+   
+ 
+});
+
 Router.route('/breed', {
     name: 'Breeding',
     template: 'Breeding',

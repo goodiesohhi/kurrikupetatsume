@@ -5,8 +5,14 @@ input.error{
     background-color:rgb(255, 231, 231);
 }
 
+@font-face {
+font-family: 'ihatecomicsans';
+src: url('fonts/IHateComicSans.ttf');
+}
+
 body, html {
     height: 100%;
+	font-family: 'IHateComicSans'
 }
 
 body { 
@@ -19,6 +25,7 @@ body {
     /* Center and scale the image nicely */
  
     background-size: cover;
+font-weight: bold;
 	 
 }
 img{
@@ -52,6 +59,7 @@ background-image: url("./res/box.png");
     border-right-style: solid;
     border-bottom-style: solid;
     border-left-style: solid;
+	
 	
 	}
 

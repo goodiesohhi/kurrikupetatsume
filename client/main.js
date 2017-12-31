@@ -402,8 +402,35 @@ USERPAGE TEMPLATE
 
 */
 
+Template.players.helpers (
+{
+	players:function () {
+		 return Meteor.users.find({}, {
+      sort: {
+        'geld': -1
+      }
+    }).fetch();
+	},
+	petcount:function (player) {
+		return count();
+	},
+	
+	viewpet:function(id){
+		
+		
+		return cutethings.find({
+      "user": id,
+	  
+    }).count();
+	
+},
+})
 
-
+Template.players.onRendered ( function()
+{
+	Meteor.subscribe('pets');
+}
+)
 //Breeding
 
  Template.Breeding.events({

@@ -87,21 +87,22 @@
         <span class="icon-bar">====</span> 
 		  <span class="icon-bar">====</span>
       </button>
-      <a class="navbar-brand" href="/"><img  class="img-fluid" src="/res/banner.png"></a>
+      <a class="" href="/"><img  class="i" src="/res/banner.png"></a>&nbsp; &nbsp;
     </div>
     <div class="collapse navbar-collapse" id="myNavbar">
       <ul class="nav navbar-nav">
          {{#if currentUser}}
-        <li> <a class="navbar-brand" href="/mypets">My Pets</a></li> 
-        <li> <a class="navbar-brand" href="/shop">Shop</a></li> 
-         <li> <a class="navbar-brand" href="/breed">Breeding</a></li> 
+        <li> <a class="navbar-brand" href="/mypets">My Pets</a></li> &nbsp; &nbsp;
+        <li> <a class="navbar-brand" href="/shop">Shop</a></li> &nbsp; &nbsp;
+         <li> <a class="navbar-brand" href="/breed">Breeding</a></li> &nbsp; &nbsp;
 		{{/if}}
       </ul>
       <ul class="nav navbar-nav navbar-right">
 	  {{#if currentUser}}
+	  <li> <a class="navbar-brand" href="/players">Players</a></li> &nbsp; &nbsp;
 	  <li> <a href="#" class="logout">Logout</a></li>
 	   {{else}}
-    
+          <li> <a class="navbar-brand" href="/players">Players</a></li> &nbsp; &nbsp;
         <li><a class="nav-link" href="{{pathFor route='register'}}">Register</a></li>
         <li><a class="nav-link" href="{{pathFor route='login'}}">Login</a></li>
 		{{/if}}
@@ -210,7 +211,7 @@
 		{{/if}}
 		
 		
-		Name:{{name}} Exp: {{exp}}/{{#if notnumber max}}∞{{else}}{{max}} {{/if}} 
+		Name: {{name}} Exp: {{exp}}/{{#if notnumber max}}∞{{else}}{{max}} {{/if}} 
 		{{#if notnumber evo}}Final Form <img align = "right" class="int" id={{_id}} src="/interact.png"/>
 		{{else}}
 		{{#if canevolve exp max }}  <img align = "right" class="evo" id={{_id}} src="/evolve.png"/>{{else}}
@@ -229,7 +230,7 @@
 	
 		
 		
-		Name:{{name}} 
+		Name: {{name}} 
 		
 		<button onclick="pet.push('{{_id}}');">Select</button>
 
@@ -283,6 +284,19 @@
 		{{/if}}
 		
 		
+</template>
+
+<template name= "players">
+
+{{#navybitsPagination data=players}}
+	
+      <div class="otherbox">
+	  
+	 
+		&nbsp; &nbsp; <a href= "/users/{{username}}">{{username}}</a> Geld:{{geld}} 
+		
+		</div>
+		{{/navybitsPagination}} 
 </template>
 
 
