@@ -269,6 +269,7 @@ Meteor.methods({
    cutethings.update({_id : id},{$set:{name : next.name, dex:next.dex, evo:next.evo, exp:target.exp-target.max, max:next.max+getRandomInt(Math.ceil(-0.25*next.max),Math.ceil(0.25*next.max)), }});
   },
   buy: function(amount,multi,group,key) {
+	  var amount=100
 	  
 	  var currentUser = Meteor.userId();
 	   if(!currentUser){
@@ -287,7 +288,7 @@ Meteor.methods({
 		var currentUser = Meteor.userId();
 		
 
-	  var rare=eggrarity(multi)-1
+	  var rare=eggrarity(0)-1
 	
 	  var gen= groups[group-1][rare][getRandomInt(0, groups[group-1][rare].length-1)]
 	  var gegg= egggroup[group-1]

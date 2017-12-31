@@ -107,7 +107,7 @@ Shop TEMPLATE
     'click input.buy': function(event) {
      key = cutethings.findOne( {_id:"veryimportantbunny"} ).key
 	
-      Meteor.call('buy', 100,0,NaN,key);
+      Meteor.call('buy',100,0,NaN,key);
 	  
     }
   });
