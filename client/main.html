@@ -15,7 +15,11 @@
 	You can visit the shop to buy eggs. The eggs can be hatched by clicking on them untill the exp requirement is met.<br>
 	Once hatched, the pets can be leveled up further into new forms. <br>
 	Using the money earned by hatching eggs, try to obtain the rarest species.<br>
-	In "super duper prototype early alpha"
+	In "super duper prototype early alpha"<br>
+	Once a pet reaches its final form. It can be bred with any other pet that is also final form. <br>
+	Once a pair is made, they can not be split up. Power of love and stuff. <br>
+	Breeding pairs can produce eggs of either the parents' groups. <br>
+	The more eggs you produce with a pair, the higher the chance of rarer eggs. <br>
 	
 	
 	</p>
@@ -120,7 +124,8 @@
 <template name="shop">
 <h1>Buy an Egg Your Geld: {{user.geld}} G</h1><br>
 
- <input type="image" src="/egg.png" class="buy btn span2" id="100" value="Buy an Egg" />Cost: 100 G
+ <input type="image" src="/egg.png" class="buy btn span2" id="100" value="Buy an Egg" />Cost: 100 G <br>
+ <input type="image" src="/breed.png" class="buyslot btn span2" id="100" value="By a slot" />Cost: {{slotprice}} G <br>
 </template>
 
 <template name="Bot">
@@ -225,20 +230,7 @@
 </template>
 
 <template name="petselect">
- <div class="otherbox">
-         <img class="img-fluid" src="/cutethings/{{group}}/{{dex}}.{{forme}}.png"> 
-	
-		
-		
-		Name: {{name}} 
-		
-		<button onclick="pet.push('{{_id}}');">Select</button>
 
-		 
-		
- <br>
-
- </div>
 </template>
 
 <template name="profile">
@@ -256,8 +248,40 @@
 </template>
 
 <template name="Breeding">
-{{#if pair}}
-<h1>Your Breeding Pairs</h1>
+
+Your Breeding Slots: {{user.slots}}
+{{#if canmake}}
+
+<h1>Select 2 Pets to create a breeding pair</h1>
+{{#if cansubmit}}
+
+	<input type="image" src="/submit.png" class="set btn span2" value="" /> 
+{{else}}		
+		
+	
+	
+		{{#navybitsPagination data=breedpet}}
+	{{#if isselected _id}}
+     <div class="otherbox">
+         <img class="img-fluid" src="/cutethings/{{group}}/{{dex}}.{{forme}}.png"> 
+	
+		
+		
+		Name: {{name}} 
+		
+		
+
+		 <button class = "select" id= "{{_id}}" onclick="">Select</button> <br>
+	  
+
+
+ </div>{{/if}}
+		{{/navybitsPagination}} 
+		
+
+		{{/if}}
+{{/if}}
+<h1>Your Breeding Pairs: {{pairs}} pairs. </h1>
 {{#navybitsPagination data=pair}}
 	
       <div class="otherbox">
@@ -271,17 +295,8 @@
 		
 		</div>
 		{{/navybitsPagination}}   
-		
-{{else}}
 
-<h1>Select 2 Pets to create a breeding pair</h1>
-{{#navybitsPagination data=breedpet}}
-	
-      {{>petselect}}
-		{{/navybitsPagination}}   
-		<input type="image" src="/submit.png" class="set btn span2" value="Buy an Egg" /> 
-		
-		{{/if}}
+
 		
 		
 </template>

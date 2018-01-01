@@ -55,6 +55,13 @@ makekey()
 { multi: true }
 )
 
+ Meteor.users.update({$or:[{"slots":null},{"slots":{$exists:false}}]},
+{$set:{"slots":0},
+
+},
+{ multi: true }
+)
+
 });
 
 Meteor.methods({
@@ -162,7 +169,8 @@ Meteor.methods({
 		var pet11= cutethings.findOne( {_id:pet1 } )
 		var pet21= cutethings.findOne( {_id:pet2 } )
 		
-		
+		if(pet11._id == pet21._id)
+		  {throw new Meteor.Error ('illegalrequest',"Nice Try.")};
 		if(pet11.user != currentUser)
 		  {throw new Meteor.Error ('illegalrequest',"Nice Try.")};
 	   if(pet21.user != currentUser)
@@ -321,6 +329,68 @@ Meteor.methods({
         },
 		 $set: {
         'msg': "One egg purchased.",
+        
+
+      },
+	 
+      });
+	
+	
+	  
+	} else{
+		
+		 Meteor.users.update({
+        _id: this.userId
+      }, {
+       
+		$set: {
+        'msg': "Not enough Geld",
+        
+
+      }
+      });
+		
+		
+		
+	}
+
+  },
+  
+  buyslot: function() {
+	  
+	  
+	  var currentUser = Meteor.userId();
+	
+	   if(!currentUser){
+            throw new Meteor.Error("not-logged-in", "You're not logged-in.");
+        }
+		  var amount=1000*(Meteor.user().slots+1)
+	
+		
+		
+		
+    
+    if (Meteor.user().geld >= amount && amount > 0){
+		var currentUser = Meteor.userId();
+		
+
+	  
+	 
+	  
+	  
+	
+	
+      Meteor.users.update({
+        _id: this.userId
+      }, {
+        $inc: {
+          
+          
+          'geld': (0 - amount),
+		  'slots': 1,
+        },
+		 $set: {
+        'msg': "One Breeding slot purchased.",
         
 
       },

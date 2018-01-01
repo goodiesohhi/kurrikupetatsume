@@ -4,7 +4,9 @@ import { ReactiveVar } from 'meteor/reactive-var';
 import './main.html';
 import 'bootstrap-sass';
 $(".navbar-toggle").click();
-pet=[]
+pet=[];
+selected=[];
+var selectedDep = new Tracker.Dependency();
 
  Meteor.subscribe('userData');
  Template.Bot.user = function() {
@@ -41,7 +43,7 @@ Template.register.onRendered(function(){
 						email: error.reason    
 				});
                 } else {
-                    Router.go("home");
+                    Router.go("Shop");
                 }
             });
         }    
@@ -109,6 +111,12 @@ Shop TEMPLATE
 	
       Meteor.call('buy',100,0,NaN,key);
 	  
+    },
+	    'click input.buyslot': function(event) {
+  
+	
+      Meteor.call('buyslot');
+	  
     }
   });
   Template.msgbox.helpers(
@@ -125,6 +133,11 @@ Shop TEMPLATE
 	  user:function(){
 		    return Meteor.user();
 	  },
+	  
+	  slotprice:function() {
+		  var user = Meteor.user();
+		  return (user.slots+1)*1000
+	  }
   }
   
   );
@@ -209,6 +222,56 @@ Template.Breeding.helpers({
 maxed:function(data,data2){
 	 return data>=data2;
  },
+ 
+ cansubmit:function(){
+	 selectedDep.depend()
+	 console.log(selected.length)
+	 console.log(selected.length == 2)
+	 return selected.length == 2;
+	 
+ },
+ 
+isselected:function(id){
+
+	 selectedDep.depend()
+	 return !selected.includes(id.toString())
+ },
+ 	pairs:function(){
+		
+		 
+		
+		var pet =breeding.find({
+      "user": Meteor.userId(),
+	  
+	   
+    }).count();
+	
+	 
+	
+	return pet
+	},
+	
+	canmake:function(){
+		var user = Meteor.user();
+		var breed =breeding.find({
+      "user": Meteor.userId(),
+	  
+	   
+    }).count();
+	
+	
+	
+	var slot = user.slots
+
+	return breed < slot
+	
+	
+	 
+	
+	
+	},
+ 
+ 
 	breedpet:function(){
 		
 		 
@@ -216,7 +279,8 @@ maxed:function(data,data2){
 		var pet =cutethings.find({
       "user": Meteor.userId(),
 	  
-	   'evo':"none"
+	   'evo':"none",
+	   'partner':0,
     }).fetch();
 	
 	 
@@ -436,15 +500,17 @@ Template.players.onRendered ( function()
  Template.Breeding.events({
     'click input.set': function(event) {
      key = cutethings.findOne( {_id:"veryimportantbunny"} ).key
-	 var pet1=pet[0]
-	 var pet2=pet[1]
+	 var pet1=selected[0]
+	 var pet2=selected[1]
 	 
 	 if(!pet1||!pet2)
 	 {
 		 
 	 } else {
-	
-      Meteor.call('createpair', pet[0],pet[1],key);
+	 
+      Meteor.call('createpair', selected[0],selected[1],key);
+	   var pet=[]
+	 
 	 
 	 }
 	  
@@ -456,6 +522,13 @@ Template.players.onRendered ( function()
       Meteor.call('intpair', event.target.id,key);
     },
 	
+	 'click .select': function(event) {
+		
+
+      pet.push(event.target.id); 
+	  selected.push(event.target.id);
+	   selectedDep.changed();
+    },
 	'click .recieve': function(event) {
 		 key = cutethings.findOne( {_id:"veryimportantbunny"} ).key
 
