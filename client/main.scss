@@ -16,6 +16,14 @@
     100% { transform: translateX(0) rotate(0);}
 	}
 
+.resize {
+    margin-left: 20px;
+	margin-right: 20px;
+	margin-top: 20px;
+	margin-bottom: 20px;
+	resize: vertical;
+    overflow: auto;
+}
 input.error{
     background-color:rgb(255, 231, 231);
 }
@@ -31,24 +39,35 @@ body, html {
 }
 
 body { 
-    /* The image used */
-    background-image: url("./res/background.png");
 
-    /* Full height */
-    height: 100%; 
+background: #e4f5fc; /* Old browsers */
+background: -moz-linear-gradient(top,  #e4f5fc 0%, #bfe8f9 26%, #9fd8ef 66%, #43efef 100%); /* FF3.6-15 */
+background: -webkit-linear-gradient(top,  #e4f5fc 0%,#bfe8f9 26%,#9fd8ef 66%,#43efef 100%); /* Chrome10-25,Safari5.1-6 */
+background: linear-gradient(to bottom,  #e4f5fc 0%,#bfe8f9 26%,#9fd8ef 66%,#43efef 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e4f5fc', endColorstr='#43efef',GradientType=0 ); /* IE6-9 */
+ height: 100%;
+    margin: 0;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
 
-    /* Center and scale the image nicely */
- 
-    background-size: cover;
 font-weight: bold;
 	 
 }
-img{
-max-width: 100%;
-height: auto;
-}
+img {
 
+}
+.imgscale{
+   width: 22%;
+    height: auto;
+}
 .petimg {
+
+ margin-left: 20px;
+  margin-top: 10px;
+   margin-right: 20px;
+    margin-bottom: 10px;
+	    width: 22%;
+    height: auto;
 
 }
 

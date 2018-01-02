@@ -123,9 +123,10 @@
 
 <template name="shop">
 <h1>Buy an Egg Your Geld: {{user.geld}} G</h1><br>
-
+<div class= "resize otherbox">
  <input type="image" src="/egg.png" class="buy btn span2" id="100" value="Buy an Egg" />Cost: 100 G <br>
  <input type="image" src="/breed.png" class="buyslot btn span2" id="100" value="By a slot" />Cost: {{slotprice}} G <br>
+ </div>
 </template>
 
 <template name="Bot">
@@ -210,17 +211,17 @@
 </template>
 
 <template name="petbox">
- <div class="petdiv otherbox {{_id}}" id= "{{_id}}">
+ <div class="petdiv otherbox {{_id}} resize" id= "{{_id}}">
         {{#if isegg dex }} <img class="petimg img-fluid" id="{{_id}}.image"  src="/cutethings/{{group}}/0.1.png"> 
 		{{else}} <img class="img-fluid petimg" src="/cutethings/{{group}}/{{dex}}.{{forme}}.png"> 
 		{{/if}}
 		
 		
 		Name: {{name}} Exp: {{exp}}/{{#if notnumber max}}∞{{else}}{{max}} {{/if}} 
-		{{#if notnumber evo}}Final Form <img align = "right" class="int" id={{_id}} src="/interact.png"/>
+		{{#if notnumber evo}}Final Form <img align = "right" class="imgscale int" id={{_id}} src="/interact.png"/>
 		{{else}}
-		{{#if canevolve exp max }}  <img align = "right" class="evo" id={{_id}} src="/evolve.png"/>{{else}}
-		<img align = "right" class="int" id={{_id}} src="/interact.png"/>  
+		{{#if canevolve exp max }}  <img align = "right" class="imgscale evo" id={{_id}} src="/evolve.png"/>{{else}}
+		<img align = "right" class="imgscale int" id={{_id}} src="/interact.png"/>  
 		 {{/if}} 
 		 {{/if}}
 		
@@ -241,7 +242,7 @@
 		{{/navybitsPagination}}   
 </template>
 <template name="msgbox">
-<div align="center" class="otherbox">
+<div align="center" class=" resize otherbox">
 <p>Most Recent:</p>
 <img class="img-fluid" src="{{user.recent}}.png">
 </div>
@@ -285,10 +286,10 @@ Your Breeding Slots: {{user.slots}}
 <h1>Your Breeding Pairs: {{pairs}} pairs. </h1>
 {{#navybitsPagination data=pair}}
 	
-      <div class="otherbox">
+      <div class="otherbox resize">
 	  
 	 
-		 <img class="img-fluid flipped petimg" src="/cutethings/{{img1}}.png"><img class="img-fluid" src="heart.png"> <img class="petimg img-fluid" src="/cutethings/{{img2}}.png"> {{#if maxed exp maxexp }}
+		 <img class="img-fluid flipped petimg" src="/cutethings/{{img1}}.png"><img class="img-fluid imgscale" src="heart.png"> <img class="petimg img-fluid" src="/cutethings/{{img2}}.png"> {{#if maxed exp maxexp }}
 		 <img align = "right" class="recieve" id={{_id}} src="/recieve.png"/> 
 	  {{else}}
 		 <img align = "right" class="intpair" id={{_id}} src="/interact.png"/>  
