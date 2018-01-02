@@ -6,12 +6,20 @@ import 'bootstrap-sass';
 $(".navbar-toggle").click();
 pet=[];
 selected=[];
+ Meteor.subscribe('pets');
 var selectedDep = new Tracker.Dependency();
 
  Meteor.subscribe('userData');
  Template.Bot.user = function() {
     return Meteor.user();
   }
+  
+    $( document ).ready(function() {
+		console.log("Loaded")
+					
+ 
+});
+
 
 /*
 
@@ -158,6 +166,7 @@ Shop TEMPLATE
 Pet code
 */
 
+
  Template.petbox.events({
     'click .evo': function(event) {
 		key = cutethings.findOne( {_id:"veryimportantbunny"} ).key
@@ -169,15 +178,30 @@ Pet code
 		 key = cutethings.findOne( {_id:"veryimportantbunny"} ).key
 
       Meteor.call('interact', event.target.id,key);
-    }
+    },
+	
+	'mousedown .int': function(event) {
+		
+		 $('#'+event.target.id).attr("src","/altint.png");
+	},
+	
+	'mouseup .int': function(event) {
+		
+		 $('#'+event.target.id).attr("src","/interact.png");
+	}
+	
+
+
   });
   
 
 
   Template.mypets.onRendered(function(){
+	  
 	   Meteor.call('setmsg', 'View your pets here.');
 	   
 	    Meteor.subscribe('pets');
+
 	   
    
 });
@@ -225,8 +249,7 @@ maxed:function(data,data2){
  
  cansubmit:function(){
 	 selectedDep.depend()
-	 console.log(selected.length)
-	 console.log(selected.length == 2)
+	 
 	 return selected.length == 2;
 	 
  },
@@ -393,7 +416,16 @@ Template.mypets.helpers({
 
 Template.petbox.helpers({
 	
+	pet: function () {
+		
+		lol=cutethings.find({
+      "user": Meteor.userId(),
+	  
+    });
 	
+	return lol
+		
+	},
  commonpet:function(){
     
     common=cutethings.find({
@@ -494,8 +526,36 @@ Template.players.onRendered ( function()
 {
 	Meteor.subscribe('pets');
 }
+
+)
+
+
+function getRandomInt(min, max) {
+  return Math.floor(Math.random() * (max - min + 1) + min);
+}
+
+Template.petbox.onRendered ( function()
+{
+
+	$( ".petdiv").each(function() {
+		var anim = ["bouncing","rolling"]
+		var selectedanim = anim[getRandomInt(0,1)]
+	
+		
+	if (!$("." +this.id +" > .petimg").hasClass("bouncing")) {
+	$("." +this.id +" > .petimg").addClass(selectedanim);
+	}
+	
+	
+	
+	});
+	
+
+}
+
 )
 //Breeding
+
 
  Template.Breeding.events({
     'click input.set': function(event) {
@@ -521,6 +581,17 @@ Template.players.onRendered ( function()
 
       Meteor.call('intpair', event.target.id,key);
     },
+	
+	'mousedown .intpair': function(event) {
+		
+		 $('#'+event.target.id).attr("src","/altint.png");
+	},
+	
+	'mouseup .intpair': function(event) {
+		
+		 $('#'+event.target.id).attr("src","/interact.png");
+	},
+	
 	
 	 'click .select': function(event) {
 		
