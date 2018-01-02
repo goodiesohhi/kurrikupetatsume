@@ -2,17 +2,17 @@
 @import "{}/node_modules/bootstrap-sass/assets/stylesheets/_bootstrap.scss";
 @keyframes bounce {
     0%   {transform: translateY(0px);}
-    20%   {transform: translateY(-5px);}
+    20%   {transform: translateY(-2px);}
     45%  {transform: translateY(0x);}
-	60%   {transform: translateY(-5px);}
+	60%   {transform: translateY(-2px);}
     100% {transform: translateY(0px);}
 	}
 	
 	@keyframes roll {
     0%   {transform: translateX(0) rotate(0);}
-    20%   {transform: translateX(-10px) rotate(-25deg);}
+    20%   {transform: translateX(-12px) rotate(-5deg);}
     45%  { transform: translateX(0) rotate(-0);}
-	60%   { transform: translateX(10px) rotate(25deg);}
+	60%   { transform: translateX(12px) rotate(5deg);}
     100% { transform: translateX(0) rotate(0);}
 	}
 
@@ -110,6 +110,11 @@ animation-name: bounce;
 animation-name: roll;
     animation-duration: 4s;
 	animation-iteration-count:infinite;
+}
+
+.static{
+
+    
 }
 .flipped {
 -webkit-transform: scaleX(-1);

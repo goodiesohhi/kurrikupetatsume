@@ -86,12 +86,10 @@ Meteor.methods({
    
    
   },
-  recieve:function (id,key) {
+  recieve:function (id) {
 	  var currentUser = Meteor.userId();
 	  var pair= breeding.findOne( {_id:id } )
-	 //  if(key!=supersecretkey) {
-		//	throw new Meteor.Error("consolemanipulation", "Anomaly Detected.");
-		//};
+
 		 if(!currentUser){
             throw new Meteor.Error("not-logged-in", "You're not logged-in.");
         };
@@ -148,11 +146,9 @@ Meteor.methods({
 		
 	}
   },
-  intpair:function (id,key) {
+  intpair:function (id) {
 	  var currentUser = Meteor.userId();
-	  //if(key!=supersecretkey) {
-		//	throw new Meteor.Error("consolemanipulation", "Anomaly Detected.");
-		//};
+	
 		 if(!currentUser){
             throw new Meteor.Error("not-logged-in", "You're not logged-in.");
         };
@@ -164,11 +160,9 @@ Meteor.methods({
 	  }
 	  
   },
-  createpair:function (pet1,pet2,key){
+  createpair:function (pet1,pet2){
 	  var currentUser = Meteor.userId();
-	  //if(key!=supersecretkey) {
-		//	throw new Meteor.Error("consolemanipulation", "Anomaly Detected.");
-		//};
+	 
 		 if(!currentUser){
             throw new Meteor.Error("not-logged-in", "You're not logged-in.");
         };
@@ -215,12 +209,9 @@ Meteor.methods({
 	  }
 	  
   },
-  interact: function(id,key) {
+  interact: function(id) {
 	  var currentUser = Meteor.userId();
-	  
-	 // if(key!=supersecretkey) {
-		//	throw new Meteor.Error("consolemanipulation", "Anomaly Detected.");
-		//};
+
 	  if(!currentUser){
             throw new Meteor.Error("not-logged-in", "You're not logged-in.");
         };
@@ -231,14 +222,12 @@ Meteor.methods({
 	  
   },
   
-  evo:function(id,key) {
+  evo:function(id) {
 	  var currentUser = Meteor.userId();
 	  var target= cutethings.findOne( {_id:id } )
 	  
 	   var next= evogroups[target.groupnumber-1][target.evo]
-	//   if(key!=supersecretkey) {
-		//	throw new Meteor.Error("consolemanipulation", "Anomaly Detected.");
-		//}
+	
 	   if(!currentUser){
             throw new Meteor.Error("not-logged-in", "You're not logged-in.");
         };
@@ -282,16 +271,14 @@ Meteor.methods({
 
    cutethings.update({_id : id},{$set:{name : next.name, dex:next.dex, evo:next.evo, exp:target.exp-target.max, max:next.max+getRandomInt(Math.ceil(-0.25*next.max),Math.ceil(0.25*next.max)), }});
   },
-  buy: function(amount,multi,group,key) {
+  buy: function(amount,multi,group) {
 	  var amount=100
 	  
 	  var currentUser = Meteor.userId();
 	   if(!currentUser){
             throw new Meteor.Error("not-logged-in", "You're not logged-in.");
         }
-	//	if(key!=supersecretkey) {
-		//	throw new Meteor.Error("consolemanipulation", "Anomaly Detected.");
-		//}
+
 		
 		if(isNaN(group)) {
 			group= getRandomInt(1,groups.length)
@@ -467,9 +454,3 @@ function makekey() {
     return string.charAt(0).toUpperCase() + string.slice(1);
 }
 
-  Meteor.setInterval(function(){
-	 	
-		
-	  makekey()
-  
-}, 60000);

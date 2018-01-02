@@ -8,6 +8,7 @@ pet=[];
 selected=[];
  Meteor.subscribe('pets');
 var selectedDep = new Tracker.Dependency();
+var  animdep = new Deps.Dependency ;
 
  Meteor.subscribe('userData');
  Template.Bot.user = function() {
@@ -19,6 +20,8 @@ var selectedDep = new Tracker.Dependency();
 					
  
 });
+
+
 
 
 /*
@@ -115,9 +118,9 @@ Shop TEMPLATE
 
   Template.shop.events({
     'click input.buy': function(event) {
-     key = cutethings.findOne( {_id:"veryimportantbunny"} ).key
+    
 	
-      Meteor.call('buy',100,0,NaN,key);
+      Meteor.call('buy',100,0,NaN);
 	  
     },
 	    'click input.buyslot': function(event) {
@@ -169,25 +172,31 @@ Pet code
 
  Template.petbox.events({
     'click .evo': function(event) {
-		key = cutethings.findOne( {_id:"veryimportantbunny"} ).key
-
-      Meteor.call('evo', event.target.id,key);
+		
+  new Audio("/sounds/evolve.wav").play();     
+      Meteor.call('evo', event.target.id);
     },
 	
-	 'click .int': function(event) {
-		 key = cutethings.findOne( {_id:"veryimportantbunny"} ).key
-
-      Meteor.call('interact', event.target.id,key);
-    },
+	'click .int': function(event) {
+		
+		 new Audio("/sounds/beep.wav").play(); 
+ Meteor.call('interact', event.target.id);	
+		 
+		 
+	},
 	
+ 
 	'mousedown .int': function(event) {
 		
-		 $('#'+event.target.id).attr("src","/altint.png");
+	 $('#'+event.target.id).attr("src","/altint.png");
+		 
+		 
 	},
 	
 	'mouseup .int': function(event) {
 		
 		 $('#'+event.target.id).attr("src","/interact.png");
+		 
 	}
 	
 
@@ -208,7 +217,8 @@ Pet code
 
 Template.Breeding.onRendered(function(){
 	   Meteor.call('setmsg', 'Here is the place to breed and stuff');
-	   
+	   animnumber=getRandomInt(0,2)
+	animdep.changed()
 	    Meteor.subscribe('pets');
 		
 	    Meteor.subscribe('mypairs');
@@ -244,9 +254,11 @@ Template.profile.helpers({
 Template.Breeding.helpers({
 	
 	animation:function () {
-			var anim = ["bouncing","rolling"]
 		
-		return anim[getRandomInt(0,1)]
+		var anim = ["bouncing","rolling","static"]
+		 var animnumber=getRandomInt(0,2)
+		  animdep.depend()
+		return anim[animnumber]
 	},
 	
 maxed:function(data,data2){
@@ -422,8 +434,11 @@ Template.mypets.helpers({
 
 Template.petbox.helpers({
 	animation:function () {
-			var anim = ["bouncing","rolling"]
-		return anim[getRandomInt(0,1)]
+		
+		var anim = ["bouncing","rolling","static"]
+		 var animnumber=getRandomInt(0,2)
+		  animdep.depend()
+		return anim[animnumber]
 	},
 	pet: function () {
 		
@@ -564,9 +579,11 @@ function getRandomInt(min, max) {
 
 Template.petbox.onRendered ( function()
 {
-
-	
-
+  
+	animdep.changed()
+	 Meteor.subscribe('pets');
+		
+	    Meteor.subscribe('mypairs');
 }
 
 )
@@ -575,7 +592,7 @@ Template.petbox.onRendered ( function()
 
  Template.Breeding.events({
     'click input.set': function(event) {
-     key = cutethings.findOne( {_id:"veryimportantbunny"} ).key
+     
 	 var pet1=selected[0]
 	 var pet2=selected[1]
 	 
@@ -584,7 +601,7 @@ Template.petbox.onRendered ( function()
 		 
 	 } else {
 	 
-      Meteor.call('createpair', selected[0],selected[1],key);
+      Meteor.call('createpair', selected[0],selected[1]);
 	   var pet=[]
 	 
 	 
@@ -593,14 +610,15 @@ Template.petbox.onRendered ( function()
     },
 	
 	 'click .intpair': function(event) {
-		 key = cutethings.findOne( {_id:"veryimportantbunny"} ).key
-
-      Meteor.call('intpair', event.target.id,key);
+		
+      
+      Meteor.call('intpair', event.target.id);
     },
 	
 	'mousedown .intpair': function(event) {
 		
 		 $('#'+event.target.id).attr("src","/altint.png");
+		 new Audio("/sounds/beep.wav").play(); 
 	},
 	
 	'mouseup .intpair': function(event) {
@@ -617,9 +635,9 @@ Template.petbox.onRendered ( function()
 	   selectedDep.changed();
     },
 	'click .recieve': function(event) {
-		 key = cutethings.findOne( {_id:"veryimportantbunny"} ).key
-
-      Meteor.call('recieve', event.target.id,key);
+		
+      new Audio("/sounds/evolve.wav").play();
+      Meteor.call('recieve', event.target.id);
     }
 	
   });

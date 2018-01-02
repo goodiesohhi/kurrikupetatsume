@@ -211,7 +211,7 @@
 </template>
 
 <template name="petbox">
- <div class="petdiv otherbox {{_id}} resize" id= "{{_id}}">
+ <div class="petdiv otherbox {{_id}} " id= "{{_id}}">
         {{#if isegg dex }} <img class="petimg img-fluid {{animation}} " id="{{_id}}.image"  src="/cutethings/{{group}}/0.1.png"> 
 		{{else}} <img class="img-fluid petimg {{animation}}" src="/cutethings/{{group}}/{{dex}}.{{forme}}.png"> 
 		{{/if}}
@@ -290,9 +290,9 @@ Your Breeding Slots: {{user.slots}}
 	  
 	 
 		 <img class="img-fluid flipped petimg {{animation}}" src="/cutethings/{{img1}}.png"><img class="img-fluid imgscale" src="heart.png"> <img class="petimg img-fluid {{animation}}" src="/cutethings/{{img2}}.png"> {{#if maxed exp maxexp }}
-		 <img align = "right" class="recieve" id={{_id}} src="/recieve.png"/> 
+		 <img align = "right" class="imgscale recieve" id={{_id}} src="/recieve.png"/> 
 	  {{else}}
-		 <img align = "right" class="intpair" id={{_id}} src="/interact.png"/>  
+		 <img align = "right" class="imgscale intpair" id={{_id}} src="/interact.png"/>  
 		{{/if}}<br> Egg Progress: {{exp}}/{{maxexp}} Egg Chain: {{chain}}/{{max}}
 		
 		</div>
