@@ -6,6 +6,8 @@ import 'bootstrap-sass';
 $(".navbar-toggle").click();
 pet=[];
 selected=[];
+animnumber=[];
+animnumbertwo=[]
  Meteor.subscribe('pets');
 var selectedDep = new Tracker.Dependency();
 var  animdep = new Deps.Dependency ;
@@ -16,7 +18,7 @@ var  animdep = new Deps.Dependency ;
   }
   
     $( document ).ready(function() {
-		console.log("Loaded")
+		
 					
  
 });
@@ -217,7 +219,7 @@ Pet code
 
 Template.Breeding.onRendered(function(){
 	   Meteor.call('setmsg', 'Here is the place to breed and stuff');
-	   animnumber=getRandomInt(0,2)
+	   
 	animdep.changed()
 	    Meteor.subscribe('pets');
 		
@@ -253,13 +255,11 @@ Template.profile.helpers({
 
 Template.Breeding.helpers({
 	
-	animation:function () {
-		
-		var anim = ["bouncing","rolling","static"]
-		 var animnumber=getRandomInt(0,2)
-		  animdep.depend()
-		return anim[animnumber]
-	},
+	user:function(){
+		    return Meteor.user();
+	  },
+	
+	
 	
 maxed:function(data,data2){
 	 return data>=data2;
@@ -294,6 +294,7 @@ isselected:function(id){
 	
 	canmake:function(){
 		var user = Meteor.user();
+		
 		var breed =breeding.find({
       "user": Meteor.userId(),
 	  
@@ -303,6 +304,7 @@ isselected:function(id){
 	
 	
 	var slot = user.slots
+	
 
 	return breed < slot
 	
@@ -344,9 +346,7 @@ isselected:function(id){
 	return pet
 	},
 	
-	user:function(){
-		    return Meteor.user();
-	  },
+	
  
  
 	
@@ -432,13 +432,105 @@ Template.mypets.helpers({
  
 });
 
-Template.petbox.helpers({
-	animation:function () {
+Template.breedbox.helpers({
+	animation:function (id) {
 		
 		var anim = ["bouncing","rolling","static"]
-		 var animnumber=getRandomInt(0,2)
+		
 		  animdep.depend()
-		return anim[animnumber]
+		 
+		return anim[animnumbertwo[id]]
+		
+	},
+	pet: function () {
+		
+		lol=cutethings.find({
+      "user": Meteor.userId(),
+	  
+    });
+	
+	return lol
+		
+	},
+	maxed:function(data,data2){
+	 return data>=data2;
+ },
+ 
+ cansubmit:function(){
+	 selectedDep.depend()
+	 
+	 return selected.length == 2;
+	 
+ },
+ 
+isselected:function(id){
+
+	 selectedDep.depend()
+	 return !selected.includes(id.toString())
+ },
+ 	pairs:function(){
+		
+		 
+		
+		var pet =breeding.find({
+      "user": Meteor.userId(),
+	  
+	   
+    }).count();
+	
+	 
+	
+	return pet
+	},
+	
+	
+ 
+ 
+	breedpet:function(){
+		
+		 
+		
+		var pet =cutethings.find({
+      "user": Meteor.userId(),
+	  
+	   'evo':"none",
+	   'partner':0,
+    }).fetch();
+	
+	 
+	
+	return pet
+	},
+	
+	pair:function(){
+		
+		 
+		
+		var pet = breeding.find({
+      "user": Meteor.userId(),
+	  
+	  
+    }).fetch();
+
+	 
+	
+	return pet
+	},
+	
+	user:function(){
+		    return Meteor.user();
+	  },
+});
+
+Template.petbox.helpers({
+	animation:function (id) {
+		
+		var anim = ["bouncing","rolling","static"]
+		
+		  animdep.depend()
+		 
+		return anim[animnumber[id]]
+		
 	},
 	pet: function () {
 		
@@ -576,10 +668,31 @@ Template.players.onRendered ( function()
 function getRandomInt(min, max) {
   return Math.floor(Math.random() * (max - min + 1) + min);
 }
+Template.breedbox.onRendered ( function () {
 
+	
+	var divbox = $(this).find(".petdiv")
+	var lol = this.$(".petdiv").attr('id')
+	
+	
+	console.log(lol)
+  animnumbertwo[lol] = getRandomInt(0,2)
+
+  
+	animdep.changed()
+	 Meteor.subscribe('pets');
+		
+	    Meteor.subscribe('mypairs');
+})
 Template.petbox.onRendered ( function()
 {
-  
+	var divbox = $(this).find(".petdiv")
+	var lol = this.$(".petdiv").attr('id')
+	
+	
+	
+  animnumber[lol] = getRandomInt(0,2)
+console.log(animnumber[lol])
 	animdep.changed()
 	 Meteor.subscribe('pets');
 		

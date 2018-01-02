@@ -212,8 +212,8 @@
 
 <template name="petbox">
  <div class="petdiv otherbox {{_id}} " id= "{{_id}}">
-        {{#if isegg dex }} <img class="petimg img-fluid {{animation}} " id="{{_id}}.image"  src="/cutethings/{{group}}/0.1.png"> 
-		{{else}} <img class="img-fluid petimg {{animation}}" src="/cutethings/{{group}}/{{dex}}.{{forme}}.png"> 
+        {{#if isegg dex }} <img class="petimg img-fluid {{animation _id}} " id="{{_id}}.image"  src="/cutethings/{{group}}/0.1.png"> 
+		{{else}} <img class="img-fluid petimg {{animation _id}}" src="/cutethings/{{group}}/{{dex}}.{{forme}}.png"> 
 		{{/if}}
 		
 		
@@ -286,23 +286,26 @@ Your Breeding Slots: {{user.slots}}
 <h1>Your Breeding Pairs: {{pairs}} pairs. </h1>
 {{#navybitsPagination data=pair}}
 	
-      <div class="otherbox resize">
-	  
-	 
-		 <img class="img-fluid flipped petimg {{animation}}" src="/cutethings/{{img1}}.png"><img class="img-fluid imgscale" src="heart.png"> <img class="petimg img-fluid {{animation}}" src="/cutethings/{{img2}}.png"> {{#if maxed exp maxexp }}
-		 <img align = "right" class="imgscale recieve" id={{_id}} src="/recieve.png"/> 
-	  {{else}}
-		 <img align = "right" class="imgscale intpair" id={{_id}} src="/interact.png"/>  
-		{{/if}}<br> Egg Progress: {{exp}}/{{maxexp}} Egg Chain: {{chain}}/{{max}}
-		
-		</div>
+   {{>breedbox}}
 		{{/navybitsPagination}}   
 
 
 		
 		
 </template>
+<template name= "breedbox">
 
+   <div class="otherbox resize">
+	  
+	 
+		 <span class= "pet1" id= {{_id}}> <img class="img-fluid flipped petimg {{animation _id}} " src="/cutethings/{{img1}}.png"></span><img class="img-fluid imgscale" src="heart.png">  <span class= "petdiv" id= {{_id}}> <img class=" pet2 petimg img-fluid {{animation _id}}" src="/cutethings/{{img2}}.png"></span> {{#if maxed exp maxexp }}
+		 <img align = "right" class="imgscale recieve" id={{_id}} src="/recieve.png"/> 
+	  {{else}}
+		 <img align = "right" class="imgscale intpair" id={{_id}} src="/interact.png"/>  
+		{{/if}}<br> Egg Progress: {{exp}}/{{maxexp}} Egg Chain: {{chain}}/{{max}}
+		
+		</div>
+</template>
 <template name= "players">
 
 Online:&nbsp;<span class="online">&nbsp; </span>&nbsp;
