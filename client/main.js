@@ -243,6 +243,12 @@ Template.profile.helpers({
 
 Template.Breeding.helpers({
 	
+	animation:function () {
+			var anim = ["bouncing","rolling"]
+		
+		return anim[getRandomInt(0,1)]
+	},
+	
 maxed:function(data,data2){
 	 return data>=data2;
  },
@@ -415,7 +421,10 @@ Template.mypets.helpers({
 });
 
 Template.petbox.helpers({
-	
+	animation:function () {
+			var anim = ["bouncing","rolling"]
+		return anim[getRandomInt(0,1)]
+	},
 	pet: function () {
 		
 		lol=cutethings.find({
@@ -501,6 +510,17 @@ USERPAGE TEMPLATE
 Template.players.helpers (
 {
 	
+	labelClass: function () {
+		
+  if (this.status.idle)
+    return "idle"
+  else if (this.status.online)
+    return "online"
+  else
+    return "otherbox"
+		
+	},
+	
 	usersOnline : function() {
   return Meteor.users.find({ "status.online": true }).fetch()
 },
@@ -545,18 +565,6 @@ function getRandomInt(min, max) {
 Template.petbox.onRendered ( function()
 {
 
-	$( ".petdiv").each(function() {
-		var anim = ["bouncing","rolling"]
-		var selectedanim = anim[getRandomInt(0,1)]
-	
-		
-	if (!$("." +this.id +" > .petimg").hasClass("bouncing")) {
-	$("." +this.id +" > .petimg").addClass(selectedanim);
-	}
-	
-	
-	
-	});
 	
 
 }

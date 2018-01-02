@@ -212,8 +212,8 @@
 
 <template name="petbox">
  <div class="petdiv otherbox {{_id}} resize" id= "{{_id}}">
-        {{#if isegg dex }} <img class="petimg img-fluid" id="{{_id}}.image"  src="/cutethings/{{group}}/0.1.png"> 
-		{{else}} <img class="img-fluid petimg" src="/cutethings/{{group}}/{{dex}}.{{forme}}.png"> 
+        {{#if isegg dex }} <img class="petimg img-fluid {{animation}} " id="{{_id}}.image"  src="/cutethings/{{group}}/0.1.png"> 
+		{{else}} <img class="img-fluid petimg {{animation}}" src="/cutethings/{{group}}/{{dex}}.{{forme}}.png"> 
 		{{/if}}
 		
 		
@@ -265,7 +265,7 @@ Your Breeding Slots: {{user.slots}}
 	{{#if isselected _id}}
      <div class="otherbox petdiv" id={{_id}}> 
 	 
-         <img class="img-fluid petimg" src="/cutethings/{{group}}/{{dex}}.{{forme}}.png"> 
+         <img class="img-fluid petimg {{animation}}" src="/cutethings/{{group}}/{{dex}}.{{forme}}.png"> 
 	
 		
 		
@@ -289,7 +289,7 @@ Your Breeding Slots: {{user.slots}}
       <div class="otherbox resize">
 	  
 	 
-		 <img class="img-fluid flipped petimg" src="/cutethings/{{img1}}.png"><img class="img-fluid imgscale" src="heart.png"> <img class="petimg img-fluid" src="/cutethings/{{img2}}.png"> {{#if maxed exp maxexp }}
+		 <img class="img-fluid flipped petimg {{animation}}" src="/cutethings/{{img1}}.png"><img class="img-fluid imgscale" src="heart.png"> <img class="petimg img-fluid {{animation}}" src="/cutethings/{{img2}}.png"> {{#if maxed exp maxexp }}
 		 <img align = "right" class="recieve" id={{_id}} src="/recieve.png"/> 
 	  {{else}}
 		 <img align = "right" class="intpair" id={{_id}} src="/interact.png"/>  
@@ -305,6 +305,10 @@ Your Breeding Slots: {{user.slots}}
 
 <template name= "players">
 
+Online:&nbsp;<span class="online">&nbsp; </span>&nbsp;
+Idle:&nbsp;<span class="idle">&nbsp; </span>&nbsp;
+Offline:&nbsp;<span class="otherbox">&nbsp; </span> <br><br>
+
 <ul class="nav nav-tabs">
 
   <li class="active"><a data-toggle="tab" href="#all">All Players</a></li>
@@ -317,10 +321,12 @@ Your Breeding Slots: {{user.slots}}
   
   {{#navybitsPagination data=players}}
 	
-      <div class="otherbox">
+      <div class="{{labelClass}}">
 	  
-	 
+	 <br>
 		&nbsp; &nbsp; <a href= "/users/{{username}}">{{username}}</a> Geld:{{geld}} 
+		<br>
+		&nbsp;
 		
 		</div>
 		{{/navybitsPagination}} 
@@ -334,10 +340,12 @@ Your Breeding Slots: {{user.slots}}
 
 	  {{#navybitsPagination data=usersOnline}}
 	
-      <div class="otherbox">
-	  
+      <div class="{{labelClass}}">
+	  <br>
 	 
 		&nbsp; &nbsp; <a href= "/users/{{username}}">{{username}}</a> Geld:{{geld}} 
+		<br>
+		&nbsp;
 		
 		</div>
 		{{/navybitsPagination}} 
