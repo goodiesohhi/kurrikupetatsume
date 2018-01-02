@@ -28,6 +28,12 @@ const percent = require('percent');
       }
     });
   });
+  
+
+
+  Meteor.publish("onlineusers", function() {
+  return Meteor.users.find({ "status.online": true });
+});
 
   Meteor.publish('mypets', function(){
     var currentUser = Meteor.user();

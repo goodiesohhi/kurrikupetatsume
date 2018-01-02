@@ -500,6 +500,14 @@ USERPAGE TEMPLATE
 
 Template.players.helpers (
 {
+	
+	usersOnline : function() {
+  return Meteor.users.find({ "status.online": true }).fetch()
+},
+
+	usersOnlinecount : function() {
+  return Meteor.users.find({ "status.online": true }).count()
+},
 	players:function () {
 		 return Meteor.users.find({}, {
       sort: {

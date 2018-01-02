@@ -305,7 +305,17 @@ Your Breeding Slots: {{user.slots}}
 
 <template name= "players">
 
-{{#navybitsPagination data=players}}
+<ul class="nav nav-tabs">
+
+  <li class="active"><a data-toggle="tab" href="#all">All Players</a></li>
+  <li><a data-toggle="tab" href="#online">Online:({{usersOnlinecount}})</a></li>
+ 
+</ul>
+
+<div class="tab-content">
+  <div id="all" class="tab-pane fade in active">
+  
+  {{#navybitsPagination data=players}}
 	
       <div class="otherbox">
 	  
@@ -314,6 +324,27 @@ Your Breeding Slots: {{user.slots}}
 		
 		</div>
 		{{/navybitsPagination}} 
+    
+   
+	  
+	  
+  </div>
+  <div id="online" class="tab-pane fade">
+  
+
+	  {{#navybitsPagination data=usersOnline}}
+	
+      <div class="otherbox">
+	  
+	 
+		&nbsp; &nbsp; <a href= "/users/{{username}}">{{username}}</a> Geld:{{geld}} 
+		
+		</div>
+		{{/navybitsPagination}} 
+	  
+  </div>
+
+</div>
 </template>
 
 
