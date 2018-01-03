@@ -263,8 +263,9 @@ Meteor.methods({
 		 
 		 throw new Meteor.Error("Final-Form","Already at Final Form")
 	 };
-	 console.log(100*(1+rand.toFixed(2)))
+	 
 	  var rand = Math.random()
+	  console.log(100*(1+rand.toFixed(2)))
 	  Meteor.users.update({
         _id: this.userId
       }, {
