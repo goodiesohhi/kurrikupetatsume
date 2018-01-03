@@ -12,6 +12,7 @@ const percent = require('percent');
     
     user.pets = 0;
     user.login =true;
+	user.slots =1;
 
     return user;
 
@@ -61,8 +62,8 @@ makekey()
 { multi: true }
 )
 
- Meteor.users.update({$or:[{"slots":null},{"slots":{$exists:false}}]},
-{$set:{"slots":0},
+ Meteor.users.update({$or:[{"slots":0},{"slots":{$exists:false}}]},
+{$set:{"slots":1},
 
 },
 { multi: true }
