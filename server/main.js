@@ -264,18 +264,18 @@ Meteor.methods({
 		 throw new Meteor.Error("Final-Form","Already at Final Form")
 	 };
 	 
-	  var rand = Math.random()
-	  console.log(100*(1+rand.toFixed(2)))
+	 
+	  var geldgain = 200*Math.Random
 	  Meteor.users.update({
         _id: this.userId
       }, {
         $inc: {
           
           
-          'geld': (100*(1+rand.toFixed(2))), 
+          'geld': (geldgain), 
         },
 		 $set: {
-        'msg': "Evolution Succesful. "+next.name+" Get!",
+        'msg': "Evolution Succesful. "+next.name+" Get! + "+ String(geldgain) + " Geld.",
 		'recent': "/cutethings/"+next.group+"/"+next.dex+"."+target.forme
         
 
