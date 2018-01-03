@@ -61,6 +61,14 @@ Router.route('/players', {
  
 });
 
+Router.route('/profile', {
+    name: 'myprofile',
+    template: 'myprofile',
+   
+ 
+});
+
+
 Router.route('/breed', {
     name: 'Breeding',
     template: 'Breeding',

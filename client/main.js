@@ -12,10 +12,24 @@ animnumbertwo=[]
 var selectedDep = new Tracker.Dependency();
 var  animdep = new Deps.Dependency ;
 
+
+
  Meteor.subscribe('userData');
  Template.Bot.user = function() {
     return Meteor.user();
   }
+  
+   Avatar.setOptions({
+    customImageProperty: function() {
+      var user = this;
+      // calculate the image URL here
+      return user.avatar;
+    },
+    imageSizes: {
+      'large': 400,
+      'mySize': 200
+    }
+  });
   
     $( document ).ready(function() {
 		
@@ -25,11 +39,66 @@ var  animdep = new Deps.Dependency ;
 
 
 
+Template.myprofile.helpers(
+  {
+	  
+	
+	
+	user:function(){
+		    return Meteor.user();
+	  },
+
+  }
+  
+  );
+  
+Template.navigation.helpers(
+  {
+	  
+	
+	
+	user:function(){
+		    return Meteor.user();
+	  },
+
+  }
+  
+  );
+  
+Template.main.helpers(
+  {
+	  
+	  viewprofile:function(){
+		 console.log(Router.current().route.getName()=="profile")
+		 return Router.current().route.getName()=="profile"
+		
+		
+	},
+	
+	user:function(){
+		    return Meteor.user();
+	  },
+
+  }
+  
+  );
+
 
 /*
 
 Register TEMPLATE
 */
+
+Template.myprofile.events({
+    'submit form': function(event){
+        event.preventDefault();
+		var avatar = $('[name=avatar]').val();
+		 Meteor.call('profileset',avatar);
+		 Router.go("players");
+		
+  
+	}
+});
 Template.register.onRendered(function(){
    var validator = $('.register').validate({
 	    rules: {
@@ -141,6 +210,7 @@ Shop TEMPLATE
   
   );
   
+  
   Template.shop.helpers(
   {
 	  user:function(){
@@ -224,6 +294,17 @@ Template.Breeding.onRendered(function(){
 	    Meteor.subscribe('pets');
 		
 	    Meteor.subscribe('mypairs');
+		console.log(Router.current().route.getName())
+	   
+   
+});
+
+Template.profile.onRendered(function(){
+	   
+	   
+	
+	
+		
 	   
    
 });
@@ -241,10 +322,24 @@ Template.profile.helpers({
 	  
     }).fetch();
 	
+	
+	
 	 
 	
 	return common
 	},
+	
+	thisuser:function(user){
+		
+		 var username=Router.current().params.username;
+		
+		 return  Meteor.users.findOne({ username:username });
+		
+		
+	},
+	
+	
+	
 	 user:function(){
 		    return Meteor.user();
 	  },
@@ -675,7 +770,7 @@ Template.breedbox.onRendered ( function () {
 	var lol = this.$(".petdiv").attr('id')
 	
 	
-	console.log(lol)
+
   animnumbertwo[lol] = getRandomInt(0,2)
 
   
@@ -692,7 +787,7 @@ Template.petbox.onRendered ( function()
 	
 	
   animnumber[lol] = getRandomInt(0,2)
-console.log(animnumber[lol])
+
 	animdep.changed()
 	 Meteor.subscribe('pets');
 		

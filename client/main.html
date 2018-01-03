@@ -26,6 +26,25 @@
 
 	
 </template>
+<template name="profbox">
+{{> avatar user=this shape="circle" size="large" shape="rounded"}} Name: {{username}}
+Rank: {{rank}} <br>
+
+</template>
+
+<template name="myprofile">
+
+        <a href= "/users/{{user.username}}">View Public Profile</a> 
+		<form class="profile">
+	    <p>Custom Avatar URL:<br> <input type="avatar" name="avatar"></p>
+     
+       
+        
+        <p><input type="submit" value="Submit"></p>
+    </form>
+
+</template>
+
 
 <template name="main">
 <div class=	"container">
@@ -40,8 +59,12 @@
   
 </div>
 <div class="row">
-
-   <div class="col-sm-4 otherbox">{{>Bot}} {{#if currentUser}}<br>{{>msgbox}}{{/if}}</div>
+   {{#if viewprofile}}
+    <div class="col-sm-4 otherbox">{{>profbox}}</div>
+   {{else}}
+    
+	 <div class="col-sm-4 otherbox">{{>Bot}} {{#if currentUser}}<br>{{>msgbox}}{{/if}}</div>
+	 {{/if}}
   <div class="col-sm-8 otherbox">{{> yield}}</div>
 
 </div>
@@ -100,13 +123,15 @@
         <li> <a class="navbar-brand" href="/shop">Shop</a></li> &nbsp; &nbsp;
          <li> <a class="navbar-brand" href="/breed">Breeding</a></li> &nbsp; &nbsp;
 		{{/if}}
+		<li> <a class="navbar-brand" href="/players">Players</a></li> &nbsp; &nbsp;
       </ul>
       <ul class="nav navbar-nav navbar-right">
 	  {{#if currentUser}}
-	  <li> <a class="navbar-brand" href="/players">Players</a></li> &nbsp; &nbsp;
+	  
+	  <li> <a class="navbar-brand" href="/profile">{{user.username}}</a></li> &nbsp; &nbsp;
 	  <li> <a href="#" class="logout">Logout</a></li>
 	   {{else}}
-          <li> <a class="navbar-brand" href="/players">Players</a></li> &nbsp; &nbsp;
+          
         <li><a class="nav-link" href="{{pathFor route='register'}}">Register</a></li>
         <li><a class="nav-link" href="{{pathFor route='login'}}">Login</a></li>
 		{{/if}}
@@ -326,10 +351,11 @@ Offline:&nbsp;<span class="otherbox">&nbsp; </span> <br><br>
 	
       <div class="{{labelClass}}">
 	  
-	 <br>
-		&nbsp; &nbsp; <a href= "/users/{{username}}">{{username}}</a> Geld:{{geld}} 
-		<br>
-		&nbsp;
+	     <p class = "margin">
+		 <a href= "/users/{{username}}">{{username}}</a> Geld:{{geld}} {{> avatar user=this shape="rounded"}}
+		
+		</p>
+		
 		
 		</div>
 		{{/navybitsPagination}} 
@@ -344,17 +370,16 @@ Offline:&nbsp;<span class="otherbox">&nbsp; </span> <br><br>
 	  {{#navybitsPagination data=usersOnline}}
 	
       <div class="{{labelClass}}">
-	  <br>
-	 
-		&nbsp; &nbsp; <a href= "/users/{{username}}">{{username}}</a> Geld:{{geld}} 
-		<br>
-		&nbsp;
+	      <p class = "margin">
+		 <a href= "/users/{{username}}">{{username}}</a> Geld:{{geld}} {{> avatar user=this shape="rounded"}}
 		
-		</div>
+		</p>
+		 </div>
 		{{/navybitsPagination}} 
 	  
-  </div>
+ 
 
+</div>
 </div>
 </template>
 

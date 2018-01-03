@@ -71,6 +71,22 @@ makekey()
 });
 
 Meteor.methods({
+	
+	 'profileset'(avatar) {
+	  
+	  	 Meteor.users.update({
+        _id: this.userId
+      }, {
+       
+		$set: {
+        'avatar': avatar,
+        
+
+      }
+      });
+   
+   
+  },
   'setmsg'(passedmsg) {
 	  
 	  	 Meteor.users.update({
