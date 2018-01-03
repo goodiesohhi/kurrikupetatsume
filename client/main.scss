@@ -63,9 +63,15 @@ font-family: 'ihatecomicsans';
 src: url('fonts/IHateComicSans.ttf');
 }
 
+@font-face {
+font-family: 'Inconsolata';
+src: url('fonts/Inconsolata.otf');
+}
+
+
 body, html {
     height: 100%;
-	font-family: 'IHateComicSans'
+	font-family: 'Inconsolata'
 }
 
 body { 
