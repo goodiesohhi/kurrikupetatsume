@@ -263,14 +263,14 @@ Meteor.methods({
 		 
 		 throw new Meteor.Error("Final-Form","Already at Final Form")
 	 };
-	
+	  var rand = Math.random()
 	  Meteor.users.update({
         _id: this.userId
       }, {
         $inc: {
           
           
-          'geld': (100),
+          'geld': (100*(1+rand.toFixed(2))), 
         },
 		 $set: {
         'msg': "Evolution Succesful. "+next.name+" Get!",
