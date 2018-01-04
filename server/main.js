@@ -265,7 +265,8 @@ Meteor.methods({
 	 };
 	 
 	 
-	  var geldgain = 200*Math.Random
+	 
+ 	  var geldgain = 200*Math.Random()
 	  Meteor.users.update({
         _id: this.userId
       }, {
@@ -275,7 +276,7 @@ Meteor.methods({
           'geld': (geldgain), 
         },
 		 $set: {
-        'msg': "Evolution Succesful. "+next.name+" Get! + "+ String(geldgain) + " Geld.",
+        'msg': "Evolution Succesful. "+next.name+" Get! + "+ geldgain + " Geld.",
 		'recent': "/cutethings/"+next.group+"/"+next.dex+"."+target.forme
         
 
