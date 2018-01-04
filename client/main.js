@@ -69,7 +69,7 @@ Template.main.helpers(
   {
 	  
 	  viewprofile:function(){
-		 console.log(Router.current().route.getName()=="profile")
+		 
 		 return Router.current().route.getName()=="profile"
 		
 		
@@ -294,7 +294,7 @@ Template.Breeding.onRendered(function(){
 	    Meteor.subscribe('pets');
 		
 	    Meteor.subscribe('mypairs');
-		console.log(Router.current().route.getName())
+		
 	   
    
 });
@@ -711,17 +711,72 @@ USERPAGE TEMPLATE
 
 Template.players.helpers (
 {
+	champion: function () {
+		
+     var champion = Meteor.users.findOne({}, {
+      sort: {
+        'geld': -1,
+		
+      },
+	  
+	  limit: 1
+	  
+    }).username
+		
+		return champion
+	},
+	
+	
+	ischampion: function () {
+		var thisuser=Meteor.users.findOne({}, {
+      sort: {
+        'geld': -1,
+		 
+      },
+	   limit: 1
+	    
+    })._id
+		
+		
+		 if (this._id==thisuser){
+    return true
+  
+		 }
+     
+		
+	},
 	
 	labelClass: function () {
 		
-  if (this.status.idle)
-    return "idle"
-  else if (this.status.online)
-    return "online"
-  else
-    return "otherbox"
+		var thisuser=Meteor.users.findOne({}, {
+      sort: {
+        'geld': -1,
+		 
+      },
+	   limit: 1
+	    
+    })._id
 		
+  if (this.status.idle){
+    return "idle"
+  }
+  else if (this.status.online){
+    return "online"
+  }
+  else if (this._id==thisuser)
+  {
+    return "champclass"
+  }
+  
+  else {
+	  
+	  return "otherbox"
+	  
+  }
+	
 	},
+	
+
 	
 	usersOnline : function() {
   return Meteor.users.find({ "status.online": true }).fetch()
