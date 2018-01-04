@@ -266,7 +266,7 @@ Meteor.methods({
 	 
 	 
 	 
- 	  var geldgain = 200*Math.Random()
+ 	  var geldgain = 200*Math.random()
 	  Meteor.users.update({
         _id: this.userId
       }, {
