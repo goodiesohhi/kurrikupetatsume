@@ -69,6 +69,16 @@ makekey()
 { multi: true }
 )
 
+breeding.update({$and:[{maxexp: { $gt: 200 }},{"setvar3":{$exists:false}}]},
+{$set:{
+	"maxexp":200,
+	"setvar3":true,
+},
+
+},
+{ multi: true }
+)
+
 });
 
 Meteor.methods({
@@ -115,8 +125,20 @@ Meteor.methods({
 		 if(pair.user != currentUser)
 		 {throw new Meteor.Error ('illegalrequest',"Nice Try.")};
 	  
-	   
+	  var champion = Meteor.users.findOne({}, {
+      sort: {
+        'geld': -1,
+		
+      },
+	  
+	  limit: 1
+	  
+    })._id
+	if (currentUser== champion){
+		 var rare=eggrarity(pair.chain*2)-1
+	} else{
 	  	  var rare=eggrarity(pair.chain)-1
+	}
 		  
 		  var egggroup2 = []
 		  egggroup2.push(cutethings.findOne( {_id:pair.pet1 } ).groupnumber)
@@ -144,6 +166,11 @@ Meteor.methods({
 		partner:0,
 		groupnumber:gen.gnumber
     });
+	
+	Meteor.users.update({_id:currentUser},{
+		$set:{msg:"Recieved one "  + cfl(gen.group)+" Egg" }
+	})
+	
 	if (pair.max>pair.chain) {
 	 breeding.update({_id : id},
 	 {$inc:{ exp: -1*pair.maxexp, chain : 1, maxexp: Math.ceil(pair.maxexp*0.25) ,}
@@ -209,7 +236,7 @@ Meteor.methods({
 			  chain:0,
 			  max: lolmax,
 			  exp: 0,
-			  maxexp: 500,
+			  maxexp: 200,
 			  active: true
 		  })
 		  
