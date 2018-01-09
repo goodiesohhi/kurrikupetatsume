@@ -207,7 +207,7 @@ Meteor.methods({
 	
 	if (pair.max>pair.chain) {
 	 breeding.update({_id : id},
-	 {$inc:{ exp: -1*pair.maxexp, chain : 1, maxexp: Math.ceil(pair.maxexp*0.25) ,}
+	 {$inc:{ exp: -1*pair.maxexp, chain : 1, maxexp: Math.ceil(pair.maxexp*0.1) ,}
 	 
 	 },
 	 {$set:{exp:0,}}
@@ -359,10 +359,13 @@ Meteor.methods({
 	  
 	  if (count > 100 && count < 250 )
 	  {
-	  var amount = count* 10
+	  amount = count* 10
 	  }
 	  else if (count > 250 ){
-	  var amount = count* 50
+	  amount = count* 50
+	  }
+	  else if (count == 0 && Meteor.user().geld<200 ){
+	  amount = 0;
 	  }
 	  else {
 		  var amount = 100
