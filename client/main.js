@@ -805,6 +805,8 @@ formatTime:function(time){
 	},
 
 labelClass: function (username) {
+	
+	console.log(username)
 		
 		var thisuser=Meteor.users.findOne({}, {
       sort: {
@@ -823,16 +825,16 @@ labelClass: function (username) {
 	   limit: 1
 	    
     })
-		
-  if (currentUser.status.idle){
-    return "idle1"
+		console.log(thisuser+" "+currentUser._id)
+  if  (currentUser._id==thisuser){
+    return "champclass" 
   }
-  else if (currentUser.status.online){
+  else if (currentUser.status.online  && currentUser._id != thisuser){
     return "online1"
   }
-  else if (currentUser._id==thisuser)
+  else if  (currentUser.status.idle && currentUser._id!=thisuser)
   {
-    return "champclass"
+    return "idle1"
   }
   
   else {
