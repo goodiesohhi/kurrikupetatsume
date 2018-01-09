@@ -122,6 +122,7 @@ Rank: {{rank}} <br>
         <li> <a class="navbar-brand" href="/mypets">My Pets</a></li> &nbsp; &nbsp;
         <li> <a class="navbar-brand" href="/shop">Shop</a></li> &nbsp; &nbsp;
          <li> <a class="navbar-brand" href="/breed">Breeding</a></li> &nbsp; &nbsp;
+		  <li> <a class="navbar-brand" href="/chat">Chatroom</a></li> &nbsp; &nbsp;
 		{{/if}}
 		<li> <a class="navbar-brand" href="/players">Players</a></li> &nbsp; &nbsp;
       </ul>
@@ -180,7 +181,7 @@ Rank: {{rank}} <br>
     <h3>Eggs</h3>
     
  
-    {{#navybitsPagination data=eggs}}
+    {{#navybitsPagination data=eggs perPage=3}}
 	
 	{{>petbox}}
 
@@ -193,7 +194,7 @@ Rank: {{rank}} <br>
     <h3>Commons</h3>
     
  
-    {{#navybitsPagination data=commonpet}}
+    {{#navybitsPagination data=commonpet perPage=3}}
 	
 	{{>petbox}}
 
@@ -204,26 +205,26 @@ Rank: {{rank}} <br>
   </div>
   <div id="slc" class="tab-pane fade">
     <h3>Slightly Less Commons</h3>
-   {{#navybitsPagination data=slcpet}}
+   {{#navybitsPagination data=slcpet perPage=3}}
 	 {{>petbox}}
 		{{/navybitsPagination}}     
   </div>
   <div id="rare" class="tab-pane fade">
     <h3>"Rares"</h3>
-{{#navybitsPagination data=rarepet}}
+{{#navybitsPagination data=rarepet perPage=3}}
 	
       {{>petbox}}
 		{{/navybitsPagination}}     
   </div>
   <div id="suprare" class="tab-pane fade">
     <h3>Super Rare</h3>
-    {{#navybitsPagination data=suppet}}
+    {{#navybitsPagination data=suppet perPage=3}}
 	{{>petbox}}
 		{{/navybitsPagination}}     
   </div>
   <div id="secrare" class="tab-pane fade">
     <h3>Secret Rare</h3>
-   {{#navybitsPagination data=secpet}}
+   {{#navybitsPagination data=secpet perPage=3}}
 	
      {{>petbox}}
 		{{/navybitsPagination}}     
@@ -261,7 +262,7 @@ Rank: {{rank}} <br>
 
 <template name="profile">
 
-{{#navybitsPagination data=viewpet}}
+{{#navybitsPagination data=viewpet perPage=3}}
 	
       {{>petbox}}
 		{{/navybitsPagination}}   
@@ -272,7 +273,33 @@ Rank: {{rank}} <br>
 <img class="img-fluid" src="{{user.recent}}.png">
 </div>
 </template>
+<template name="chat">
 
+
+<div class="chatbox">
+
+      
+      {{#navybitsPagination data=chatmsg perPage=20}}
+	
+     <div class="msg">{{username}} : {{msg}}</div> 
+		{{/navybitsPagination}}   
+</div>
+
+<div class="chatbar">
+
+	<form class="chat">
+	<div class="input-group">
+    <span class="input-group-addon">Chat:</span>
+<input autocomplete="off" id="msg" type="text" class="msg form-control" name="txtmsg">  
+</div>
+ 
+</form>
+     
+  
+
+</div>
+
+</template>
 <template name="Breeding">
 
 Your Breeding Slots: {{user.slots}}
@@ -347,7 +374,7 @@ Champion:  <a href= "/users/{{champion}}">{{champion}}</a>
 <div class="tab-content">
   <div id="all" class="tab-pane fade in active">
   
-  {{#navybitsPagination data=players}}
+  {{#navybitsPagination data=players perPage=10}}
 	
       <div class="{{labelClass}} ">
 	  
@@ -368,7 +395,7 @@ Champion:  <a href= "/users/{{champion}}">{{champion}}</a>
   <div id="online" class="tab-pane fade">
   
 
-	  {{#navybitsPagination data=usersOnline}}
+	  {{#navybitsPagination data=usersOnline perPage=10}}
 	
       <div class="{{labelClass}}">
 	      <p class = "margin">

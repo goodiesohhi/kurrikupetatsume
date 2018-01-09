@@ -99,6 +99,19 @@ Template.myprofile.events({
   
 	}
 });
+
+Template.chat.events({
+    'submit form': function(event){
+        event.preventDefault();
+		var msg = $('[name=txtmsg]').val();
+		$(".msg").val(""); 
+		 Meteor.call('sendmsg',msg);
+		 
+		
+  
+	}
+});
+
 Template.register.onRendered(function(){
    var validator = $('.register').validate({
 	    rules: {
@@ -708,6 +721,22 @@ Template.petbox.helpers({
 USERPAGE TEMPLATE
 
 */
+
+Template.chat.helpers ({
+
+chatmsg :function (){
+	var msg = chat.find({}, {
+      sort: {datefield: -1},
+	  
+	  limit: 30
+	  
+    }).fetch()
+	
+	return msg
+	
+}
+}
+)
 
 Template.players.helpers (
 {

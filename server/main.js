@@ -30,10 +30,16 @@ const percent = require('percent');
     });
   });
   
+  
+  
 
 
   Meteor.publish("onlineusers", function() {
   return Meteor.users.find({ "status.online": true });
+});
+
+  Meteor.publish("chatbox", function() {
+  return chat.find();
 });
 
   Meteor.publish('mypets', function(){
@@ -53,8 +59,18 @@ const percent = require('percent');
 
 
 Meteor.startup(() => {
-	
+	Meteor.setInterval(function(){
+  deletechat()
+}, 5000);
 makekey()
+
+chat.remove({}, {
+      sort: {datefield: 1},
+	  
+	  
+	  
+  })
+
  cutethings.update({$or:[{"partner":null},{"partner":{$exists:false}}]},
 {$set:{"partner":0},
 
@@ -82,6 +98,24 @@ breeding.update({$and:[{maxexp: { $gt: 200 }},{"setvar3":{$exists:false}}]},
 });
 
 Meteor.methods({
+	
+	
+	'sendmsg'(msg) {
+		
+	  var id = Meteor.userId();
+	  var user=  Meteor.users.findOne( {_id:id } )
+	    chat.insert({
+		datefield: new Date(),
+		msg: msg,
+        
+        user: user._id,
+		username: user.username,
+		
+    });
+	
+   
+   
+  },
 	
 	 'profileset'(avatar) {
 	  
@@ -499,5 +533,13 @@ function makekey() {
 
   function cfl(string) {
     return string.charAt(0).toUpperCase() + string.slice(1);
+}
+
+  function deletechat() {
+	  
+var Old = new Date()
+Old.setMinutes(Old.getMinutes()-1)
+chat.remove({datefield: {$lt:Old}})
+  
 }
 

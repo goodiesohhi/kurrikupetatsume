@@ -88,6 +88,27 @@ Router.route('/breed', {
     }
 });
 
+Router.route('/chat', {
+    name: 'chat',
+    template: 'chat',
+   
+    onBeforeAction: function(){
+        var currentUser = Meteor.userId();
+        if(currentUser){
+            this.next();
+        } else {
+            this.render("login");
+        }
+    },
+	  subscriptions: function(){
+          Meteor.subscribe('mypets');
+		  Meteor.subscribe('mypairs');
+		  Meteor.subscribe('chatbox');
+		  
+    }
+});
+
 cutethings = new Mongo.Collection('cutethings');
 
 breeding = new Mongo.Collection('breeding');
+chat = new Mongo.Collection('chat');
