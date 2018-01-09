@@ -299,9 +299,9 @@ Users Online: {{usersOnlinecount}}
       
       {{#navybitsPagination data=chatmsg perPage=20}}
 	
-     <div class="msg">{{username}} : {{msg}}</div> 
+     <div class="msg"> <span class= "{{labelClass username}}"> <a href= "/users/{{username}}">{{username}}</a> </span> <span class="green">@ {{formatTime datefield}}</span> : {{msg}}</div> 
 		{{/navybitsPagination}}   
-</div>
+
 
 <div class="chatbar">
 
@@ -312,6 +312,7 @@ Users Online: {{usersOnlinecount}}
 </div>
  
 </form>
+</div>
      
   
 

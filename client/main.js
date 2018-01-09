@@ -11,6 +11,12 @@ animnumbertwo=[]
  Meteor.subscribe('pets');
 var selectedDep = new Tracker.Dependency();
 var  animdep = new Deps.Dependency ;
+var options = {  
+    weekday: "long", year: "numeric", month: "short",  
+    day: "numeric", hour: "2-digit", minute: "2-digit"  
+};  
+
+
 
 
 
@@ -774,6 +780,68 @@ USERPAGE TEMPLATE
 */
 
 Template.chat.helpers ({
+	
+	user:function(){
+		    return Meteor.user();
+	  },
+	  
+formatTime:function(time){
+	return time.toLocaleTimeString();
+},
+
+	usersOnline : function() {
+  return Meteor.users.find({ "status.online": true }).fetch()
+},
+
+	usersOnlinecount : function() {
+  return Meteor.users.find({ "status.online": true }).count()
+},
+	players:function () {
+		 return Meteor.users.find({}, {
+      sort: {
+        'geld': -1
+      }
+    }).fetch();
+	},
+
+labelClass: function (username) {
+		
+		var thisuser=Meteor.users.findOne({}, {
+      sort: {
+        'geld': -1,
+		 
+      },
+	   limit: 1
+	    
+    })._id
+	
+	var currentUser= Meteor.users.findOne({username:username}, {
+      sort: {
+        'geld': -1,
+		 
+      },
+	   limit: 1
+	    
+    })
+		
+  if (currentUser.status.idle){
+    return "idle1"
+  }
+  else if (currentUser.status.online){
+    return "online1"
+  }
+  else if (currentUser._id==thisuser)
+  {
+    return "champclass"
+  }
+  
+  else {
+	  
+	  return "otherbox1"
+	  
+  }
+	
+	},
 
 chatmsg :function (){
 	var msg = chat.find({}, {
