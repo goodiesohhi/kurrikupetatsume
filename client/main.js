@@ -286,9 +286,10 @@ Shop TEMPLATE
 	  
 	  price: function (){
 		  
-	  var currentUser = this._id
+	  var currentUser =  Meteor.userId()
 	  var amountbase=100
 	  var count = cutethings.find({ "user": currentUser }).count()
+	  console.log(count)
 	  
 	  
 	  if (count > 100 && count < 250 )
