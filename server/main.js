@@ -353,9 +353,22 @@ Meteor.methods({
    cutethings.update({_id : id},{$set:{name : next.name, dex:next.dex, evo:next.evo, exp:target.exp-target.max, max:next.max+getRandomInt(Math.ceil(-0.25*next.max),Math.ceil(0.25*next.max)), }});
   },
   buy: function(amount,multi,group) {
-	  var amount=100
-	  
 	  var currentUser = Meteor.userId();
+	  var amountbase=100
+	  var count = cutethings.find({ "user": currentUser }).count()
+	  
+	  if (count > 100 && count < 250 )
+	  {
+	  var amount = count* 10
+	  }
+	  else if (count > 250 ){
+	  var amount = count* 50
+	  }
+	  else {
+		  var amount = 100
+	  }
+	  
+	  
 	   if(!currentUser){
             throw new Meteor.Error("not-logged-in", "You're not logged-in.");
         }
@@ -538,7 +551,7 @@ function makekey() {
   function deletechat() {
 	  
 var Old = new Date()
-Old.setMinutes(Old.getMinutes()-10)
+Old.setMinutes(Old.getMinutes()-60)
 chat.remove({datefield: {$lt:Old}})
   
 }

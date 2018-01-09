@@ -283,6 +283,30 @@ Shop TEMPLATE
   
   Template.shop.helpers(
   {
+	  
+	  price: function (){
+		  
+	  var currentUser = this._id
+	  var amountbase=100
+	  var count = cutethings.find({ "user": currentUser }).count()
+	  
+	  
+	  if (count > 100 && count < 250 )
+	  {
+	  return count* 10
+	  }
+	  else if (count > 250 ){
+	  return count* 50
+	  }
+	  else if (count == 0 && Meteor.user().geld<200 ){
+	  return 0;
+	  }
+	  else {
+		  return 100
+	  }
+		  
+	  },
+	  
 	  user:function(){
 		    return Meteor.user();
 	  },
