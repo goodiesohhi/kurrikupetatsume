@@ -32,6 +32,20 @@ Rank: {{rank}} <br>
 
 </template>
 
+<template name = "onlinebox">
+Users Online: {{usersOnlinecount}}
+ {{#navybitsPagination data=usersOnline perPage=10}}
+	
+      <div class="{{labelClass}}">
+
+		&nbsp; &nbsp;   <a href= "/users/{{username}}">{{username}}</a> 
+		
+		
+		 </div>
+		{{/navybitsPagination}} 
+		
+</template>
+
 <template name="myprofile">
 
         <a href= "/users/{{user.username}}">View Public Profile</a> 
@@ -61,7 +75,11 @@ Rank: {{rank}} <br>
 <div class="row">
    {{#if viewprofile}}
     <div class="col-sm-4 otherbox">{{>profbox}}</div>
-   {{else}}
+   
+	 
+	 {{else if viewchat}}
+	 <div class="col-sm-4 otherbox">{{>onlinebox}}</div>
+	 {{else}}
     
 	 <div class="col-sm-4 otherbox">{{>Bot}} {{#if currentUser}}<br>{{>msgbox}}{{/if}}</div>
 	 {{/if}}

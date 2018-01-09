@@ -538,7 +538,7 @@ function makekey() {
   function deletechat() {
 	  
 var Old = new Date()
-Old.setMinutes(Old.getMinutes()-1)
+Old.setMinutes(Old.getMinutes()-10)
 chat.remove({datefield: {$lt:Old}})
   
 }

@@ -75,6 +75,13 @@ Template.main.helpers(
 		
 	},
 	
+	viewchat:function(){
+		 
+		 return Router.current().route.getName()=="chat"
+		
+		
+	},
+	
 	user:function(){
 		    return Meteor.user();
 	  },
@@ -223,6 +230,50 @@ Shop TEMPLATE
   
   );
   
+  Template.onlinebox.helpers({
+	  
+	  usersOnlinecount : function() {
+  return Meteor.users.find({ "status.online": true }).count()
+},
+	
+	labelClass: function () {
+		
+		var thisuser=Meteor.users.findOne({}, {
+      sort: {
+        'geld': -1,
+		 
+      },
+	   limit: 1
+	    
+    })._id
+		
+  if (this.status.idle){
+    return "idle"
+  }
+  else if (this.status.online){
+    return "online"
+  }
+  else if (this._id==thisuser)
+  {
+    return "champclass"
+  }
+  
+  else {
+	  
+	  return "otherbox"
+	  
+  }
+	
+	},
+	
+
+	
+	usersOnline : function() {
+  return Meteor.users.find({ "status.online": true }).fetch()
+},
+	
+  }
+  );
   
   Template.shop.helpers(
   {
