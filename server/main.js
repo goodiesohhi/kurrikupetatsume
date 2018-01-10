@@ -569,8 +569,8 @@ chat.remove({datefield: {$lt:Old}})
 
 
 function botmsg() {
-	var genmsg= getRandomInt(1,4)
-	if (genmsg = 1) {
+	var genmsg= getRandomInt(1,7)
+	if (genmsg == 1) {
 	chat.insert({
 		datefield: new Date(),
 		msg: "You can (not) redo.",
@@ -580,7 +580,7 @@ function botmsg() {
 		
     });
 	}
-	else if (genmsg = 1) {
+	else if (genmsg == 2) {
 	chat.insert({
 		datefield: new Date(),
 		msg: "I mustn't run away",
@@ -590,10 +590,41 @@ function botmsg() {
 		
     });
 	}
-	else if (genmsg = 1) {
+	else if (genmsg == 3) {
 	chat.insert({
 		datefield: new Date(),
 		msg: "Mankind’s greatest fear is Mankind itself..",
+        
+        user: "eva001",
+		username: "redacted",
+		
+    });
+	}
+	else if (genmsg == 4) {
+	chat.insert({
+		datefield: new Date(),
+		msg: "Your truth can be changed simply by the way you accept it. That's how fragile the truth for a human is.",
+        
+        user: "eva001",
+		username: "redacted",
+		
+    });
+	}
+	else if (genmsg == 5) {
+	chat.insert({
+		datefield: new Date(),
+		msg: "Any new position from which you view your reality will change your perception of its nature. It's all literally a matter of perspective.",
+        
+        user: "eva001",
+		username: "redacted",
+		
+    });
+	
+	}
+	else if (genmsg == 6) {
+	chat.insert({
+		datefield: new Date(),
+		msg: "Humans cannot create from nothingness. Humans cannot accomplish anything without holding on to something. Humans are not gods.",
         
         user: "eva001",
 		username: "redacted",
