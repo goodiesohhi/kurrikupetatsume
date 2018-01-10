@@ -8,6 +8,8 @@ pet=[];
 selected=[];
 animnumber=[];
 animnumbertwo=[]
+ 
+ sr = ScrollReveal({'reset': true});
  Meteor.subscribe('pets');
 var selectedDep = new Tracker.Dependency();
 var  animdep = new Deps.Dependency ;
@@ -112,6 +114,11 @@ Template.myprofile.events({
   
 	}
 });
+
+Template.chat.onRendered( function () {
+	sr.reveal('.chatbox');
+	
+})
 
 Template.chat.events({
     'submit form': function(event){
@@ -396,7 +403,10 @@ Template.Breeding.onRendered(function(){
 
 Template.profile.onRendered(function(){
 	   
-	   
+	   	var divbox = $(this).find(".petdiv")
+	var lol = this.$(".petdiv").attr('id')
+	
+	
 	
 	
 		
@@ -718,6 +728,7 @@ Template.petbox.helpers({
 		var anim = ["bouncing","rolling","static"]
 		
 		  animdep.depend()
+		  
 		 
 		return anim[animnumber[id]]
 		
@@ -1009,10 +1020,19 @@ Template.breedbox.onRendered ( function () {
 		
 	    Meteor.subscribe('mypairs');
 })
+
+
 Template.petbox.onRendered ( function()
 {
 	var divbox = $(this).find(".petdiv")
 	var lol = this.$(".petdiv").attr('id')
+	
+	
+	
+	
+	
+	
+	  
 	
 	
 	
@@ -1022,6 +1042,8 @@ Template.petbox.onRendered ( function()
 	 Meteor.subscribe('pets');
 		
 	    Meteor.subscribe('mypairs');
+		
+   
 }
 
 )

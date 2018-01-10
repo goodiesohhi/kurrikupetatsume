@@ -253,11 +253,13 @@ Users Online: {{usersOnlinecount}}
 	  
 
 </template>
-
+<template name="sync">
+</template>
 <template name="petbox">
  <div class="petdiv otherbox {{_id}} " id= "{{_id}}">
-        {{#if isegg dex }} <img class="petimg img-fluid {{animation _id}} " id="{{_id}}.image"  src="/cutethings/{{group}}/0.1.png"> 
-		{{else}} <img class="img-fluid petimg {{animation _id}}" src="/cutethings/{{group}}/{{dex}}.{{forme}}.png"> 
+
+        {{#if isegg dex }} <img class="petimg img-fluid {{animation _id}} " id="{{_id}}image"  src="/cutethings/{{group}}/0.1.png"> 
+		{{else}} <img class="img-fluid petimg {{animation _id}}" id="{{_id}}image"  src="/cutethings/{{group}}/{{dex}}.{{forme}}.png"> 
 		{{/if}}
 		
 		

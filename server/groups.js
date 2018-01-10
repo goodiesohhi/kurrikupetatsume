@@ -7,7 +7,7 @@ rabblimp = {group:"leporine", dex:3, name:"Rabblimp",evo:'none',exp:0,max:NaN,ra
 //reptile 
 reptileegg = {group:"reptile", dex:0,name:"Reptillian Egg",evo:0,exp:0,max:100,rarity:1,gnumber:2};
 
-serpentine = {group:"reptile", dex:1,name:"Serpentine",evo:1,exp:0,max:5000,rarity:5,gnumber:2};
+serpentine = {group:"reptile", dex:1,name:"Serpentine",evo:2,exp:0,max:5000,rarity:5,gnumber:2};
 boweniteconstrictor = {group:"reptile", dex:2,name:"Bowenite Constrictor",evo:'none',exp:0,max:NaN,rarity:5,gnumber:2};
 snek = {group:"reptile", dex:3,name:"Snek",evo:'none',exp:0,max:NaN,rarity:1,gnumber:2};
 fanguine = {group:"reptile", dex:4,name:"Fanguine",evo:'5',exp:0,max:300,rarity:5,gnumber:2};
