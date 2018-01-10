@@ -61,15 +61,23 @@ const percent = require('percent');
 Meteor.startup(() => {
 	Meteor.setInterval(function(){
   deletechat()
+  
 }, 5000);
-makekey()
+Meteor.setInterval(function(){
+  botmsg()
+  
+}, 1200000);
 
+makekey()
 chat.remove({}, {
       sort: {datefield: 1},
 	  
 	  
 	  
   })
+botmsg()
+
+
 
  cutethings.update({$or:[{"partner":null},{"partner":{$exists:false}}]},
 {$set:{"partner":0},
@@ -559,3 +567,48 @@ chat.remove({datefield: {$lt:Old}})
   
 }
 
+
+function botmsg() {
+	var genmsg= getRandomInt(1,4)
+	if (genmsg = 1) {
+	chat.insert({
+		datefield: new Date(),
+		msg: "You can (not) redo.",
+        
+        user: "eva001",
+		username: "redacted",
+		
+    });
+	}
+	else if (genmsg = 1) {
+	chat.insert({
+		datefield: new Date(),
+		msg: "I mustn't run away",
+        
+        user: "eva001",
+		username: "redacted",
+		
+    });
+	}
+	else if (genmsg = 1) {
+	chat.insert({
+		datefield: new Date(),
+		msg: "Mankind’s greatest fear is Mankind itself..",
+        
+        user: "eva001",
+		username: "redacted",
+		
+    });
+	}
+	else  {
+	chat.insert({
+		datefield: new Date(),
+		msg: "Man fears the darkness, and so he scrapes away at the edges of it with fire.",
+        
+        user: "eva001",
+		username: "redacted",
+		
+    });
+	}
+	
+}
