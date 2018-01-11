@@ -560,6 +560,7 @@ function passivegain() {
 	  
     })._id
   console.log(champ)
+    Meteor.users.update({_id: { $ne: champ  }},{$inc:{geld : 5  }});
    cutethings.update({user: { $ne: champ  }},{$inc:{exp : 10  }});
 }
 
