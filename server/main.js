@@ -549,7 +549,6 @@ else {
 
 
 function passivegain() {
-	
 	var  champ = Meteor.users.findOne({}, {
       sort: {
         'geld': -1,
@@ -559,9 +558,41 @@ function passivegain() {
 	  limit: 1
 	  
     })._id
+	
+	  Meteor.users.find({}).map(function(user) {
+        Meteor.users.update({
+          _id: user._id
+        }, {
+          $inc: {
+            'geld': 5,
+            
+          },
+
+
+
+        })
+      });
+	  
+	  
+        Meteor.users.update({
+          _id: champ
+        }, {
+          $inc: {
+            'geld': -5,
+            
+          },
+
+
+
+        })
+      
+
+
+
+
+	
   console.log(champ)
-    Meteor.users.update({},{$inc:{geld : 5  }});
-	Meteor.users.update({"_id": champ },{$inc:{geld : -5  }});
+    
 	
    
 }
