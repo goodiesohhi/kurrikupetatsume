@@ -607,7 +607,7 @@ function passivegain() {
           _id: user._id
         }, {
           $inc: {
-            'exp': 10,
+            'exp': 1,
             
           },
 
