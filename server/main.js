@@ -59,19 +59,17 @@ const percent = require('percent');
 
 
 Meteor.startup(() => {
-	Meteor.setInterval(function(){
-  deletechat()
-  
-}, 5000);
+
 Meteor.setInterval(function(){
   botmsg()
   
 }, 1200000);
 
 	Meteor.setInterval(function(){
+		deletechat()
   passivegain();
   
-}, 3000);
+}, 30000);
 
 passivegain()
 chat.remove({}, {
@@ -561,8 +559,8 @@ function passivegain() {
 	  limit: 1
 	  
     })._id
-  
-   cutethings.update({user: { $ne: champ  }},{$inc:{exp : 1  }});
+  console.log(champ)
+   cutethings.update({user: { $ne: champ  }},{$inc:{exp : 10  }});
 }
 
 function getRandomInt(min, max) {
