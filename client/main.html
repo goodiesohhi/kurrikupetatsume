@@ -27,9 +27,12 @@
 	
 </template>
 <template name="profbox">
-{{> avatar user=this shape="circle" size="large" shape="rounded"}} Name: {{username}}
+<div class="panel panel-default">
+<div class="panel-heading">{{> avatar user=this shape="circle" size="large" shape="rounded"}} Name: {{username}} </div>
+<div class="panel-body">
 Rank: {{rank}} <br>
-
+</div>
+</div>
 </template>
 
 <template name = "onlinebox">
@@ -73,17 +76,19 @@ Users Online: {{usersOnlinecount}}
   
 </div>
 <div class="row">
+
    {{#if viewprofile}}
-    <div class="col-sm-4 otherbox">{{>profbox}}</div>
+    <div class="col-sm-4 panel">{{>profbox}}</div>
    
 	 
 	 {{else if viewchat}}
-	 <div class="col-sm-4 otherbox">{{>onlinebox}}</div>
+	 <div class="col-sm-4 panel">{{>onlinebox}}</div>
 	 {{else}}
     
-	 <div class="col-sm-4 otherbox">{{>Bot}} {{#if currentUser}}<br>{{>msgbox}}{{/if}}</div>
+	 <div class="col-sm-4 panel">{{>Bot}} {{#if currentUser}}<br>{{>msgbox}}{{/if}}</div>
 	 {{/if}}
-  <div class="col-sm-8 otherbox">{{> yield}}</div>
+	 
+  <div class="col-sm-8">{{> yield}}</div>
 
 </div>
 <div class="row">
@@ -101,24 +106,48 @@ Users Online: {{usersOnlinecount}}
 </template>
 
 <template name="register">
-    <h2>Register</h2>
+    <div class="panel panel-default">
+    <div class="panel-heading"><h3>Register</h3></div>
+	<div class="panel-body">
     <form class="register">
-	    <p>Username:<br> <input type="username" name="username" required></p>
-        <p>Email: <br><input type="email" name="email" required></p>
+	<div class="input-group">
+	    <span class="input-group-addon">Username:</span>
+		<input class= "form-control" type="username" name="username" required>
+	</div>	
+	<div class="input-group">
+		<span class="input-group-addon">Email:</span>
+        <input class= "form-control" type="email" name="email" required>
+	</div>	
+	<div class="input-group">
+        <span class="input-group-addon">Password:</span>
+		<input class= "form-control" type="password" name="password" required>
+     </div>   
+		<p><input  class= "btn btn-success" type="submit" value="Register"></p>
 		
-        <p>Password: <br><input type="password" name="password" required></p>
-        <p><input type="submit" value="Register"></p>
     </form>
+	</div>
+	</div>
 </template>
 
 <template name="login">
-    <h2>Login</h2>
+<div class="panel panel-default">
+    <div class="panel-heading"> <h2>Login</h2> </div>
+	<div class="panel-body">
     <form class="login">
-        <p>Email: <input type="email" name="email" required></p>
-        <p>Password: <input type="password" name="password" required></p>
-        <p><input type="submit" value="Login"></p>
+	<div class="input-group">
+	<span class="input-group-addon">Email:</span>
+
+        <input class= "form-control" type="email" name="email" required>
+	</div> <div class="input-group">
+	<span class="input-group-addon">Password:</span>
+         <input  class= "form-control" type="password" name="password" required>
+        </div>
+		<p><input class= "btn btn-success" type="submit" value="Login"></p>
 		<a class="nav-link" href="{{pathFor route='register'}}">Or Register</a>
-    </form>
+    
+	</form>
+	</div>
+	</div>
 </template>
 
 <template name="navigation">
@@ -166,25 +195,43 @@ Users Online: {{usersOnlinecount}}
 </template>
 
 <template name="shop">
-<h1>Buy an Egg Your Geld: {{user.geld}} G</h1><br>
-<div class= "resize otherbox">
+<div class="panel panel-default">
+<div class="panel-heading"><h1>This is a shop. Your Geld: {{user.geld}} G</h1></div>
+<div class="row">
+<div class="col-sm-6">
+<div class= "resize panel-body">
+
  <input type="image" src="/egg.png" class="buy btn span2" id="100" value="Buy an Egg" />Cost: {{price}} G <br>
  <input type="image" src="/breed.png" class="buyslot btn span2" id="100" value="By a slot" />Cost: {{slotprice}} G <br>
+ </div>
+ </div>
+ <div class="col-sm-6">
+ <img class="img-fluid"   src="/res/shopkeep.png"> 
+ </div>
+ </div>
  </div>
 </template>
 
 <template name="Bot">
+<div class="panel panel-default">
 <div class="row">
+  <div class="panel-body">
   {{#if currentUser}}
-  <div class="col-sm-2">AlertBox:</div>
-  <div class="col-sm-10"><h1>{{user.msg}}</h1></div>
+
+  <div class="col-sm-6">{{speaker}}:</div>
+  <div class="col-sm-6">{{user.msg}}</div>
+  
   {{else}}
-  <div class="col-sm-12"><h1>Not Logged In.</h1><br><input type="image" src="cutethings/Leporine/1.png" /><a class="nav-link" href="{{pathFor route='login'}}">Login</a></div>
+  <div class="col-sm-12"><h1>Not Logged In.</h1><br><input type="image" src="cutethings/Leporine/1.1.png" /><a class="nav-link" href="{{pathFor route='login'}}">Login</a></div>
   {{/if}}
+  </div>
+</div>
 </div>
 </template>
 
 <template name="mypets">
+<div class="panel panel-default">
+<div class="panel-heading">
 <ul class="nav nav-tabs">
 <li class="active"><a data-toggle="tab" href="#eggs">Eggs</a></li>
   <li><a data-toggle="tab" href="#common">Commons</a></li>
@@ -193,7 +240,8 @@ Users Online: {{usersOnlinecount}}
   <li><a data-toggle="tab" href="#suprare">Super Rare</a></li>
   <li><a data-toggle="tab" href="#secrare">Secret Rare</a></li>
 </ul>
-
+</div>
+<div class ="panel-body">
 <div class="tab-content">
   <div id="eggs" class="tab-pane fade in active">
     <h3>Eggs</h3>
@@ -249,13 +297,15 @@ Users Online: {{usersOnlinecount}}
 	    
   </div>
 </div>
+</div>
 
 	  
-
+</div>
 </template>
 <template name="sync">
 </template>
 <template name="petbox">
+<div class="panel-body">
  <div class="petdiv otherbox {{_id}} " id= "{{_id}}">
 
         {{#if isegg dex }} <img class="petimg img-fluid {{animation _id}} " id="{{_id}}image"  src="/cutethings/{{group}}/0.1.png"> 
@@ -272,7 +322,7 @@ Users Online: {{usersOnlinecount}}
 		 {{/if}}
 		
  <br>
-
+</div>
  </div>
 </template>
 
@@ -288,32 +338,53 @@ Users Online: {{usersOnlinecount}}
 		{{/navybitsPagination}}   
 </template>
 <template name="msgbox">
-<div align="center" class=" resize otherbox">
+<div align="center" class=" resize panel panel-default"> 
+<div class ="panel-heading">
+
+{{#if breeder}}
+
+{{else}}
+
 <p>Most Recent Evolution:</p>
+{{/if}}
+
+
+
+</div>
+<div class="panel-body">
+
+{{#if breeder}}
+ <img class="img-fluid"   src="/res/breeder.png"> 
+{{else}}
 <img class="img-fluid" src="{{user.recent}}.png">
+
+{{/if}}
+</div>
 </div>
 </template>
 <template name="chat">
 
 
-<div class="chatbox">
+<div class="panel panel-default">
 
-      
+    <div class="panel-body">  
       {{#navybitsPagination data=chatmsg perPage=20}}
 	
-     <div class="msg"> <span class= "{{labelClass username}}"> <a href= "/users/{{username}}">{{username}}</a> </span> <span class="green">@ {{formatTime datefield}}</span> : {{msg}}</div> 
+     <div class="msgentry"> <span class= "{{labelClass username}}"> <a href= "/users/{{username}}">{{username}}</a> </span> <span class="green">@ {{formatTime datefield}}</span> : {{msg}}</div> 
 		{{/navybitsPagination}}   
+</div>
 
+<div class="chatbar panel-footer">
 
-<div class="chatbar">
-
-	<form class="chat">
+	
 	<div class="input-group">
     <span class="input-group-addon">Chat:</span>
+	<form class="chat">
 <input autocomplete="off" id="msg" type="text" class="msg form-control" name="txtmsg">  
+</form>
 </div>
  
-</form>
+
 </div>
      
   
@@ -322,21 +393,27 @@ Users Online: {{usersOnlinecount}}
 
 </template>
 <template name="Breeding">
-
-Your Breeding Slots: {{user.slots}}
+<div class="panel panel-default">
+<div class="panel-heading">
+<h3>
+Your Breeding Slots: {{user.slots}}  <button class = "toggle btn btn-success hidebtn"  onclick="toggle()">Matchmaking</button>
+</h3>
+</div>
 {{#if canmake}}
-
-<h1>Select 2 Pets to create a breeding pair</h1>
+{{#if breedhide}}
+<div class="panel-heading">
+<h1>Select 2 Pets to create a breeding pair</h1> </div>
 {{#if cansubmit}}
 
 	<input type="image" src="/submit.png" class="set btn span2" value="" /> 
+	
 {{else}}		
 		
 	
 	
 		{{#navybitsPagination data=breedpet}}
 	{{#if isselected _id}}
-     <div class="otherbox petdiv" id={{_id}}> 
+     <div class="petdiv panel-default" id={{_id}}> 
 	 
          <img class="img-fluid petimg {{animation}}" src="/cutethings/{{group}}/{{dex}}.{{forme}}.png"> 
 	
@@ -346,14 +423,14 @@ Your Breeding Slots: {{user.slots}}
 		
 		
 
-		 <button class = "select" id= "{{_id}}" onclick="">Select</button> <br>
+		 <button class = "select btn btn-success" id= "{{_id}}" onclick="">Select</button> 
 	  
 
 
  </div>{{/if}}
 		{{/navybitsPagination}} 
 		
-
+{{/if}}
 		{{/if}}
 {{/if}}
 <h1>Your Breeding Pairs: {{pairs}} pairs. </h1>
@@ -362,7 +439,7 @@ Your Breeding Slots: {{user.slots}}
    {{>breedbox}}
 		{{/navybitsPagination}}   
 
-
+</div>
 		
 		
 </template>
@@ -378,9 +455,11 @@ Your Breeding Slots: {{user.slots}}
 		{{/if}}<br> Egg Progress: {{exp}}/{{maxexp}} Egg Chain: {{chain}}/{{max}}
 		
 		</div>
+		
 </template>
 <template name= "players">
-
+<div class="panel panel-default">
+<div class="panel-heading">
 Online:&nbsp;<span class="online">&nbsp; </span>&nbsp;
 Idle:&nbsp;<span class="idle">&nbsp; </span>&nbsp;
 Offline:&nbsp;<span class="otherbox">&nbsp; </span> <br><br>
@@ -391,13 +470,14 @@ Champion:  <a href= "/users/{{champion}}">{{champion}}</a>
   <li><a data-toggle="tab" href="#online">Online:({{usersOnlinecount}})</a></li>
  
 </ul>
+</div>
 
-<div class="tab-content">
-  <div id="all" class="tab-pane fade in active">
+<div class="tab-content panel-body ">
+  <div id="all" class="tab-pane fade in active ">
   
   {{#navybitsPagination data=players perPage=10}}
 	
-      <div class="{{labelClass}} ">
+      <div class="{{labelClass}} panel-body">
 	  
 	     <p class = "margin">
 		 {{#if ischampion}} <img class="img-fluid" id=""  src="/champ.png">  {{/if}}
@@ -428,6 +508,7 @@ Champion:  <a href= "/users/{{champion}}">{{champion}}</a>
 	  
  
 
+</div>
 </div>
 </div>
 </template>

@@ -30,16 +30,7 @@ input.error{
 
 .online{
 background-color:rgb(100, 231, 100);
- height: 100%; 
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-	
-	  border: 2px solid black;
-   border-top-style: solid;
-    border-right-style: solid;
-    border-bottom-style: solid;
-    border-left-style: solid;
+
 	
 }
 
@@ -54,16 +45,7 @@ background-color:rgb(100, 231, 100);
 
 .champclass{
 background-color:rgb(255, 255, 100);
- height: 100%; 
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-	
-	  border: 2px solid black;
-   border-top-style: solid;
-    border-right-style: solid;
-    border-bottom-style: solid;
-    border-left-style: solid;
+
 	
 	
 	
@@ -74,11 +56,11 @@ background-color:rgb(255, 255, 100);
  color: green
 }
 
-.msg{
+.msgentry{
 
  
-    
-	margin-left: 20px;
+    margin-left: 20px;
+	
 	
   
 	
@@ -97,16 +79,7 @@ background-color:rgb(211, 211, 211);
 .idle{
 background-color:rgb(231, 231, 0);
 
- height: 100%; 
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-	
-	  border: 2px solid black;
-   border-top-style: solid;
-    border-right-style: solid;
-    border-bottom-style: solid;
-    border-left-style: solid;
+
 }
 
 .idle1{
@@ -200,7 +173,7 @@ background-image: url("./res/box.png");
     border-radius: 10px;
 }
 .otherbox {
-background-color:rgb(196, 240, 239);
+background-color:rgb(226, 255, 240);
   height: 100%; 
     background-position: center;
     background-repeat: no-repeat;
@@ -211,6 +184,12 @@ background-color:rgb(196, 240, 239);
     border-right-style: solid;
     border-bottom-style: solid;
     border-left-style: solid;
+	
+	
+	}
+	.otherbox2 {
+background-color:rgb(226, 255, 240);
+ 
 	
 	
 	}

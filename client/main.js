@@ -7,12 +7,13 @@ $(".navbar-toggle").click();
 pet=[];
 selected=[];
 animnumber=[];
-animnumbertwo=[]
- 
+animnumbertwo=[];
+hiding=null;
  sr = ScrollReveal({'reset': true});
  Meteor.subscribe('pets');
 var selectedDep = new Tracker.Dependency();
 var  animdep = new Deps.Dependency ;
+var  hidedep = new Deps.Dependency ;
 var options = {  
     weekday: "long", year: "numeric", month: "short",  
     day: "numeric", hour: "2-digit", minute: "2-digit"  
@@ -23,10 +24,27 @@ var options = {
 
 
  Meteor.subscribe('userData');
- Template.Bot.user = function() {
-    return Meteor.user();
-  }
+ 
   
+  Template.Bot.helpers({
+	 speaker:function(){
+		  
+	  
+	  
+	  if (Router.current().route.getName()=="Shop"){
+		  return "Shopkeep Bunnyball"
+	  } 
+	  else if (Router.current().route.getName()=="Breeding") {
+		  return "Breeder Bunnyball"
+	  }
+	  else{
+		  return "Helper"
+	  }
+	  },  
+	 user: function(){
+		 return Meteor.user();
+	 },
+  })
    Avatar.setOptions({
     customImageProperty: function() {
       var user = this;
@@ -75,7 +93,7 @@ Template.navigation.helpers(
   
 Template.main.helpers(
   {
-	  
+	 
 	  viewprofile:function(){
 		 
 		 return Router.current().route.getName()=="profile"
@@ -239,6 +257,10 @@ Shop TEMPLATE
 	  user:function(){
 		    return Meteor.user();
 	  },
+	  
+	  breeder:function(){
+		  return Router.current().route.getName()=="Breeding"
+	  },
   }
   
   );
@@ -273,7 +295,7 @@ Shop TEMPLATE
   
   else {
 	  
-	  return "otherbox"
+	  return "otherbox2"
 	  
   }
 	
@@ -393,9 +415,11 @@ Template.Breeding.onRendered(function(){
 	   Meteor.call('setmsg', 'Here is the place to breed and stuff');
 	   
 	animdep.changed()
+	
 	    Meteor.subscribe('pets');
 		
 	    Meteor.subscribe('mypairs');
+		
 		
 	   
    
@@ -459,6 +483,10 @@ Template.Breeding.helpers({
 		    return Meteor.user();
 	  },
 	
+	breedhide:function(){
+		hidedep.depend()
+		return hiding==true
+	},
 	
 	
 maxed:function(data,data2){
@@ -956,7 +984,7 @@ Template.players.helpers (
   
   else {
 	  
-	  return "otherbox"
+	  return "otherbox2"
 	  
   }
 	
@@ -1051,6 +1079,9 @@ Template.petbox.onRendered ( function()
 
 
  Template.Breeding.events({
+	 
+	
+	
     'click input.set': function(event) {
      
 	 var pet1=selected[0]
@@ -1101,3 +1132,22 @@ Template.petbox.onRendered ( function()
     }
 	
   });
+  
+  toggle= function(){
+	  
+     
+	 if (hiding == true)
+	 {
+		 hiding= false
+		
+		  hidedep.changed()
+		  $( ".hidebtn" ).removeClass( "active" );
+	 } else {
+		 hiding = true
+		 $( ".hidebtn" ).addClass( "active" );
+		  hidedep.changed()
+		 
+	 }
+	  selected=[]
+	  
+  }
