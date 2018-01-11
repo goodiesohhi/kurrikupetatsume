@@ -71,7 +71,7 @@ Meteor.setInterval(function(){
   
 }, 15000);
 
-passivegain()
+
 chat.remove({}, {
       sort: {datefield: 1},
 	  
