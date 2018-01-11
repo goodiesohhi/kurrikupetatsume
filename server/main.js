@@ -68,7 +68,12 @@ Meteor.setInterval(function(){
   
 }, 1200000);
 
-makekey()
+	Meteor.setInterval(function(){
+  passivegain();
+  
+}, 3000);
+
+passivegain()
 chat.remove({}, {
       sort: {datefield: 1},
 	  
@@ -544,6 +549,21 @@ else {
 };
 
 
+
+function passivegain() {
+	
+	var  champ = Meteor.users.findOne({}, {
+      sort: {
+        'geld': -1,
+		
+      },
+	  
+	  limit: 1
+	  
+    })._id
+  
+   cutethings.update({user: { $ne: champ  }},{$inc:{exp : 1  }});
+}
 
 function getRandomInt(min, max) {
   return Math.floor(Math.random() * (max - min + 1) + min);
