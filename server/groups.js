@@ -1,29 +1,29 @@
 //pets
 //leporine
 bunnyegg = {group:"leporine", dex:0,name:"Leporine Egg",evo:0,exp:0,max:200,rarity:1,gnumber:1};
-bunnyball = {group:"leporine", dex:1, name:"Bunnyball",evo:2,exp:0,max:400,rarity:1,gnumber:1};
-ballooney = {group:"leporine", dex:2, name:"Ballooney",evo:3,exp:0,max:1700,rarity:1,gnumber:1};
+bunnyball = {group:"leporine", dex:1, name:"Bunnyball",evo:2,exp:0,max:1200,rarity:1,gnumber:1};
+ballooney = {group:"leporine", dex:2, name:"Ballooney",evo:3,exp:0,max:2700,rarity:1,gnumber:1};
 rabblimp = {group:"leporine", dex:3, name:"Rabblimp",evo:'none',exp:0,max:NaN,rarity:1,gnumber:1};
 //reptile 
 reptileegg = {group:"reptile", dex:0,name:"Reptillian Egg",evo:0,exp:0,max:100,rarity:1,gnumber:2};
 
-serpentine = {group:"reptile", dex:1,name:"Serpentine",evo:2,exp:0,max:5000,rarity:5,gnumber:2};
+serpentine = {group:"reptile", dex:1,name:"Serpentine",evo:2,exp:0,max:20000,rarity:5,gnumber:2};
 boweniteconstrictor = {group:"reptile", dex:2,name:"Bowenite Constrictor",evo:'none',exp:0,max:NaN,rarity:5,gnumber:2};
 snek = {group:"reptile", dex:3,name:"Snek",evo:'none',exp:0,max:NaN,rarity:1,gnumber:2};
-fanguine = {group:"reptile", dex:4,name:"Fanguine",evo:'5',exp:0,max:300,rarity:5,gnumber:2};
-dracihpo = {group:"reptile", dex:5,name:"Dracihpo",evo:'6',exp:0,max:1200,rarity:5,gnumber:2};
+fanguine = {group:"reptile", dex:4,name:"Fanguine",evo:'5',exp:0,max:3000,rarity:5,gnumber:2};
+dracihpo = {group:"reptile", dex:5,name:"Dracihpo",evo:'6',exp:0,max:22000,rarity:5,gnumber:2};
 ophicard = {group:"reptile", dex:6,name:"Ophicard",evo:'none',exp:0,max:NaN,rarity:5,gnumber:2};
 
 //avian
 avianegg = {group:"avian", dex:0,name:"Birdie Egg",evo:0,exp:0,max:60,rarity:1,gnumber:3};
-turken = {group:"avian", dex:1,name:"Turken",evo:2,exp:0,max:100,rarity:1,gnumber:3};
-grouster = {group:"avian", dex:2,name:"Grouster",evo:3,exp:0,max:300,rarity:1,gnumber:3};
+turken = {group:"avian", dex:1,name:"Turken",evo:2,exp:0,max:700,rarity:1,gnumber:3};
+grouster = {group:"avian", dex:2,name:"Grouster",evo:3,exp:0,max:1200,rarity:1,gnumber:3};
 peacockatrice= {group:"avian", dex:3,name:"Peacockatrice",evo:'none',exp:0,max:NaN,rarity:1,gnumber:3};
 
 //fishies
 fishyegg = {group:"fishies", dex:0,name:"Fishy Egg",evo:0,exp:0,max:50,rarity:1,gnumber:4};
 phish = {group:"fishies", dex:1,name:"Phish",evo:2,exp:0,max:120,rarity:1,gnumber:4};
-finposter = {group:"fishies", dex:2,name:"Finposter",evo:3,exp:0,max:809,rarity:1,gnumber:4};
+finposter = {group:"fishies", dex:2,name:"Finposter",evo:3,exp:0,max:8009,rarity:1,gnumber:4};
 ripoff = {group:"fishies", dex:3,name:"Ripoff",evo:'none',exp:0,max:NaN,rarity:1,gnumber:4};
 
 egggroup= [bunnyegg,reptileegg,avianegg,fishyegg]
