@@ -69,7 +69,7 @@ Meteor.setInterval(function(){
 		deletechat()
   passivegain();
   
-}, 15000);
+}, 60000);
 
 
 chat.remove({}, {
@@ -591,7 +591,7 @@ function passivegain() {
           _id: pair._id
         }, {
           $inc: {
-            'exp': 1,
+            'exp': 10,
             
           },
 
@@ -607,7 +607,7 @@ function passivegain() {
           _id: user._id
         }, {
           $inc: {
-            'exp': 1,
+            'exp': 5,
             
           },
 
