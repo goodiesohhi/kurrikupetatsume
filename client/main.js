@@ -250,7 +250,7 @@ Shop TEMPLATE
       Meteor.call('buy',100,0,NaN,function(error,result) {
 		  
 		  if(error){
-	alert('Error');
+	return false;
 		}else{
 			console.log(result)
 Meteor.popUp("popup2", result)
@@ -417,7 +417,7 @@ Pet code
       Meteor.call('evo', event.target.id, function(error,result) {
 		  
 		  if(error){
-	alert('Error');
+	return false;
 		}else{
 Meteor.popUp("popup", result,)
 }
@@ -463,7 +463,7 @@ Meteor.popUp("popup", result,)
       Meteor.call('evo', event.target.id, function(error,result) {
 		  
 		  if(error){
-	alert('Error');
+	return false;
 		}else{
 Meteor.popUp("popup", result,)
 }
@@ -1316,7 +1316,7 @@ Template.petbox.onRendered ( function()
 	      Meteor.call('recieve', event.target.id, function(error,result) {
 		  
 		  if(error){
-	alert('Error');
+	return false;
 		}else{
 			console.log(result)
 Meteor.popUp("popup2", result)
