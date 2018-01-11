@@ -585,10 +585,10 @@ function passivegain() {
 
         });
 	  
-	  breeding.find({}).map(function(pair) {
-		  if (pair.user !=champ && pair.exp < pair.maxexp) {
+	  breeding.find({ user: {$ne:champ} }).map(function(pair) {
+		  if (pair.exp < pair.maxexp) {
         breeding.update({
-          _id: user._id
+          _id: pair._id
         }, {
           $inc: {
             'exp': 1,
@@ -602,7 +602,7 @@ function passivegain() {
       });
 	  
 	  cutethings.find({ user : {$ne:champ }}).map(function(user) {
-		  if (user.user != champ && user.exp < user.max ) {
+		  if (user.exp < user.max ) {
         cutethings.update({
           _id: user._id
         }, {
