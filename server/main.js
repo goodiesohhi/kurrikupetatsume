@@ -573,8 +573,7 @@ function passivegain() {
         })
       });
 	  
-	  
-        Meteor.users.update({
+	  Meteor.users.update({
           _id: champ
         }, {
           $inc: {
@@ -584,7 +583,36 @@ function passivegain() {
 
 
 
+        });
+	  
+	  breeding.find({}).map(function(user) {
+        breeding.update({
+          _id: user._id
+        }, {
+          $inc: {
+            'exp': 1,
+            
+          },
+
+
+
         })
+      });
+	  
+	  breeding.update({
+          user: champ
+        }, {
+          $inc: {
+            'exp': -1,
+            
+          },
+
+
+
+        });
+	  
+	  
+        
       
 
 
