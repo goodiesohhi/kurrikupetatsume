@@ -9,6 +9,8 @@ selected=[];
 animnumber=[];
 animnumbertwo=[];
 hiding=null;
+
+
  sr = ScrollReveal({'reset': true});
  Meteor.subscribe('pets');
 var selectedDep = new Tracker.Dependency();
@@ -20,6 +22,9 @@ var options = {
 };  
 
 
+Template.popup.events({ "click .done": function(event){ $(event.target). trigger("popDown") } })
+
+Template.popup2.events({ "click .done": function(event){ $(event.target). trigger("popDown") } })
 
 
 
@@ -242,7 +247,20 @@ Shop TEMPLATE
     'click input.buy': function(event) {
     
 	
-      Meteor.call('buy',100,0,NaN);
+      Meteor.call('buy',100,0,NaN,function(error,result) {
+		  
+		  if(error){
+	alert('Error');
+		}else{
+			console.log(result)
+Meteor.popUp("popup2", result)
+}
+		  
+		  
+		  
+	  }
+	  
+	  );
 	  
     },
 	    'click input.buyslot': function(event) {
@@ -253,6 +271,32 @@ Shop TEMPLATE
     }
   });
   Template.msgbox.helpers(
+  {
+	  user:function(){
+		    return Meteor.user();
+	  },
+	  
+	  breeder:function(){
+		  return Router.current().route.getName()=="Breeding"
+	  },
+  }
+  
+  );
+  
+  Template.popup.helpers(
+  {
+	  user:function(){
+		    return Meteor.user();
+	  },
+	  
+	  breeder:function(){
+		  return Router.current().route.getName()=="Breeding"
+	  },
+  }
+  
+  );
+  
+    Template.popup2.helpers(
   {
 	  user:function(){
 		    return Meteor.user();
@@ -370,7 +414,20 @@ Pet code
     'click .evo': function(event) {
 		
   new Audio("/sounds/evolve.wav").play();     
-      Meteor.call('evo', event.target.id);
+      Meteor.call('evo', event.target.id, function(error,result) {
+		  
+		  if(error){
+	alert('Error');
+		}else{
+Meteor.popUp("popup", result,)
+}
+		  
+		  
+		  
+	  }
+	  
+	  );
+	  
     },
 	
 	'click .int': function(event) {
@@ -398,6 +455,54 @@ Pet code
 
 
   });
+  
+  Template.petpage.events({
+    'click .evo': function(event) {
+		
+  new Audio("/sounds/evolve.wav").play();     
+      Meteor.call('evo', event.target.id, function(error,result) {
+		  
+		  if(error){
+	alert('Error');
+		}else{
+Meteor.popUp("popup", result,)
+}
+		  
+		  
+		  
+	  }
+	  
+	  );
+	  
+    },
+	
+	'click .int': function(event) {
+		
+		 new Audio("/sounds/beep.wav").play(); 
+ Meteor.call('interact', event.target.id);	
+		 
+		 
+	},
+	
+ 
+	'mousedown .int': function(event) {
+		
+	 $('#'+event.target.id).attr("src","/altint.png");
+		 
+		 
+	},
+	
+	'mouseup .int': function(event) {
+		
+		 $('#'+event.target.id).attr("src","/interact.png");
+		 
+	}
+	
+
+
+  });
+  
+
   
 
 
@@ -827,6 +932,84 @@ Template.petbox.helpers({
 });
 
 
+Template.petpage.helpers({
+	animation:function (id) {
+		
+		var anim = ["bouncing","rolling","static"]
+		
+		  animdep.depend()
+		  
+		 
+		return anim[animnumber[id]]
+		
+	},
+	pet: function () {
+		
+		lol=cutethings.find({
+      "user": Meteor.userId(),
+	  
+    });
+	
+	return lol
+		
+	},
+ commonpet:function(){
+    
+    common=cutethings.find({
+      "user": Meteor.userId(),
+	  'rarity': 1,
+    }).fetch();
+	
+	return common
+ },
+  slcpet:function(){
+    
+    return cutethings.find({
+      "user": Meteor.userId(),
+	  'rarity': 2,
+    }).fetch();
+ },
+  rarepet:function(){
+    
+    return cutethings.find({
+      "user": Meteor.userId(),
+	  'rarity': 3,
+    }).fetch();
+ },
+  suppet:function(){
+    
+    return cutethings.find({
+      "user": Meteor.userId(),
+	  'rarity': 4,
+    }).fetch();
+ },
+  secpet:function(){
+    
+    return cutethings.find({
+      "user": Meteor.userId(),
+	  'rarity': 5,
+    }).fetch();
+ },
+ 
+ isegg:function(getdata){
+	 
+	return getdata === 0
+	
+	 
+ },
+ 
+ canevolve:function(data,data2){
+	 return data>=data2;
+ },
+ 
+  notnumber:function(data){
+	 return isNaN(data);
+ }
+ 
+});
+
+
+
 
   function cfl(string) {
     return string.charAt(0).toUpperCase() + string.slice(1);
@@ -1128,7 +1311,22 @@ Template.petbox.onRendered ( function()
 	'click .recieve': function(event) {
 		
       new Audio("/sounds/evolve.wav").play();
-      Meteor.call('recieve', event.target.id);
+   
+	  
+	      Meteor.call('recieve', event.target.id, function(error,result) {
+		  
+		  if(error){
+	alert('Error');
+		}else{
+			console.log(result)
+Meteor.popUp("popup2", result)
+}
+		  
+		  
+		  
+	  }
+	  
+	  );
     }
 	
   });

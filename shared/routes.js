@@ -12,6 +12,16 @@ Router.route("/users/:username",{
     }
 	
 });
+
+Router.route("/pets/:petid",{
+    name:"petpage",
+    controller:"petController",
+	subscriptions: function(){
+         return Meteor.subscribe('pets');
+    }
+	
+});
+
 Router.route('/register');
 Router.route('/login');
 Router.route('/mypets', {

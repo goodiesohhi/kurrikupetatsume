@@ -302,8 +302,50 @@ Users Online: {{usersOnlinecount}}
 	  
 </div>
 </template>
-<template name="sync">
+<template name="popup">
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Success</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <img class="img-fluid" src="{{user.recent}}.png"> {{user.recentname}} get! + {{user.recentgain}} Geld. <br> <a class= "btn done btn-success" href= "/pets/{{user.recentid}}">View Pet</a>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="done btn btn-secondary" data-dismiss="modal">Close</button>
+        
+      </div>
+    </div>
+  </div>
+</div>
 </template>
+
+<template name="popup2">
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Success</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <img class="img-fluid" src="{{user.recent}}.png"> {{user.recentname}} get! <br> <a class= "btn done btn-success" href= "/pets/{{user.recentid}}">View Pet</a>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="done btn btn-secondary" data-dismiss="modal">Close</button>
+        
+      </div>
+    </div>
+  </div>
+</div>
+</template>
+
 <template name="petbox">
 <div class="panel-body">
  <div class="petdiv otherbox {{_id}} " id= "{{_id}}">
@@ -313,7 +355,7 @@ Users Online: {{usersOnlinecount}}
 		{{/if}}
 		
 		
-		Name: {{name}} ID: {{_id}} Exp: {{exp}}/{{#if notnumber max}}∞{{else}}{{max}} {{/if}} 
+		Name: {{name}} <a href= "/pets/{{_id}}">View Pet</a>  Exp: {{exp}}/{{#if notnumber max}}∞{{else}}{{max}} {{/if}} 
 		{{#if notnumber evo}}Final Form <img align = "right" class="imgscale int" id={{_id}} src="/interact.png"/>
 		{{else}}
 		{{#if canevolve exp max }}  <img align = "right" class="imgscale evo" id={{_id}} src="/evolve.png"/>{{else}}
@@ -337,30 +379,50 @@ Users Online: {{usersOnlinecount}}
       {{>petbox}}
 		{{/navybitsPagination}}   
 </template>
-<template name="msgbox">
-<div align="center" class=" resize panel panel-default"> 
-<div class ="panel-heading">
 
-{{#if breeder}}
+<template name="petpage">
 
-{{else}}
+<div class="panel panel-default">
 
-<p>Most Recent Evolution:</p>
-{{/if}}
-
-
-
+<div class="panel-header">
+<h3 align = "center"> {{name}}</h3>
 </div>
 <div class="panel-body">
 
+ {{#if isegg dex }} <img class="petimg img-fluid {{animation _id}} " id="{{_id}}image"  src="/cutethings/{{group}}/0.1.png"> 
+		{{else}} <img class="img-fluid petimg {{animation _id}}" id="{{_id}}image"  src="/cutethings/{{group}}/{{dex}}.{{forme}}.png"> 
+		{{/if}}
+		
+		
+	Exp: {{exp}}/{{#if notnumber max}}∞{{else}}{{max}} {{/if}} 
+		{{#if notnumber evo}}Final Form <img align = "right" class="imgscale int" id={{_id}} src="/interact.png"/>
+		{{else}}
+		{{#if canevolve exp max }}  <img align = "right" class="imgscale evo" id={{_id}} src="/evolve.png"/>{{else}}
+		<img align = "right" class="imgscale int" id={{_id}} src="/interact.png"/>  
+		 {{/if}} 
+		 {{/if}}
+		 </div>
+		 
+		 </div>
+</template>
+<template name="msgbox">
+
 {{#if breeder}}
+
+
+
+
+
+<div class="panel-body">
+
+
  <img class="img-fluid"   src="/res/breeder.png"> 
-{{else}}
-<img class="img-fluid" src="{{user.recent}}.png">
+
+
+</div>
 
 {{/if}}
-</div>
-</div>
+
 </template>
 <template name="chat">
 

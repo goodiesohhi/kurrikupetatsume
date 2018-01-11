@@ -32,6 +32,8 @@ const percent = require('percent');
   
   
   
+  
+  
 
 
   Meteor.publish("onlineusers", function() {
@@ -210,11 +212,27 @@ Meteor.methods({
 		forme:petscripts[gen.name](),
 		partner:0,
 		groupnumber:gen.gnumber
-    });
-	
+    }, function(err,derp){
+    
 	Meteor.users.update({_id:currentUser},{
-		$set:{msg:"Recieved one "  + cfl(gen.group)+" Egg" }
+		$set:{
+			
+			msg:"Recieved one "  + cfl(gen.group)+" Egg",
+		'recentid': derp,
+		'recentname': cfl(gen.group)+" Egg",
+		'recent': "/cutethings/"+gen.group+"/0.1",
+		
+		
+		}
 	})
+	
+	
+
+});
+
+	
+	
+	
 	
 	if (pair.max>pair.chain) {
 	 breeding.update({_id : id},
@@ -234,6 +252,7 @@ Meteor.methods({
 	 );
 		
 	}
+	return "yes"
   },
   intpair:function (id) {
 	  var currentUser = Meteor.userId();
@@ -349,7 +368,10 @@ Meteor.methods({
         },
 		 $set: {
         'msg': "Evolution Succesful. "+next.name+" Get! + "+ geldgain + " Geld.",
-		'recent': "/cutethings/"+next.group+"/"+next.dex+"."+target.forme
+		'recent': "/cutethings/"+next.group+"/"+next.dex+"."+target.forme,
+		'recentid': target._id,
+		'recentname': next.name,
+		'recentgain': geldgain,
         
 
       },
@@ -417,7 +439,22 @@ Meteor.methods({
 		forme:petscripts[gen.name](),
 		partner:0,
 		groupnumber:gen.gnumber
-    });
+    },function(err,derp){
+    
+	Meteor.users.update({_id:currentUser},{
+		$set:{
+			
+		'recentid': derp,
+		'recentname': cfl(gen.group)+" Egg",
+		'recent': "/cutethings/"+gen.group+"/0.1",
+		
+		
+		}
+	})
+	
+	
+
+});
 	
 	
       Meteor.users.update({
