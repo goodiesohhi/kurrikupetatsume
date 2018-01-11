@@ -69,7 +69,7 @@ Meteor.setInterval(function(){
 		deletechat()
   passivegain();
   
-}, 30000);
+}, 15000);
 
 passivegain()
 chat.remove({}, {
@@ -561,7 +561,7 @@ function passivegain() {
     })._id
   console.log(champ)
     Meteor.users.update({_id: { $ne: champ  }},{$inc:{geld : 5  }});
-   cutethings.update({user: { $ne: champ  }},{$inc:{exp : 10  }});
+   
 }
 
 function getRandomInt(min, max) {
