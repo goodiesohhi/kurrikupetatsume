@@ -329,7 +329,7 @@ Shop TEMPLATE
 	  return count* 50
 	  }
 	  else if (count == 0 && Meteor.user().geld<200 ){
-	  return 0;
+	  return 1;
 	  }
 	  else {
 		  return 100

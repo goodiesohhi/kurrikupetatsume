@@ -373,7 +373,7 @@ Meteor.methods({
 	  amount = count* 50
 	  }
 	  else if (count == 0 && Meteor.user().geld<200 ){
-	  amount = 0;
+	  amount = 1;
 	  }
 	  else {
 		  var amount = 100
