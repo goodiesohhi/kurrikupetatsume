@@ -599,6 +599,20 @@ function passivegain() {
         })
       });
 	  
+	  cutethings.find({}).map(function(user) {
+        breeding.update({
+          user: {$ne:champ}
+        }, {
+          $inc: {
+            'exp': 10,
+            
+          },
+
+
+
+        })
+      });
+	  
 	  breeding.update({
           user: champ
         }, {
@@ -619,7 +633,7 @@ function passivegain() {
 
 
 	
-  console.log(champ)
+  
     
 	
    
