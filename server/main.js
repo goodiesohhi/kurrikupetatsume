@@ -585,7 +585,8 @@ function passivegain() {
 
         });
 	  
-	  breeding.find({}).map(function(user) {
+	  breeding.find({}).map(function(pair) {
+		  if (pair.user !=champ && pair.exp < pair.maxexp) {
         breeding.update({
           _id: user._id
         }, {
@@ -597,11 +598,13 @@ function passivegain() {
 
 
         })
+		  };
       });
 	  
-	  cutethings.find({}).map(function(user) {
-        breeding.update({
-          user: {$ne:champ}
+	  cutethings.find({ user : {$ne:champ }}).map(function(user) {
+		  if (user.user != champ && user.exp < user.max ) {
+        cutethings.update({
+          _id: user._id
         }, {
           $inc: {
             'exp': 10,
@@ -611,20 +614,10 @@ function passivegain() {
 
 
         })
+		  }
       });
 	  
-	  breeding.update({
-          user: champ
-        }, {
-          $inc: {
-            'exp': -1,
-            
-          },
-
-
-
-        });
-	  
+	 
 	  
         
       
