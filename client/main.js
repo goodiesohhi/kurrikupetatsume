@@ -1277,6 +1277,7 @@ Template.petbox.onRendered ( function()
 	 
       Meteor.call('createpair', selected[0],selected[1]);
 	   var pet=[]
+	   var selected=[]
 	 
 	 
 	 }

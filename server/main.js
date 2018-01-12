@@ -44,6 +44,7 @@ const percent = require('percent');
   return chat.find();
 });
 
+
   Meteor.publish('mypets', function(){
     var currentUser = Meteor.user();
     return cutethings.find({ user: currentUser });
