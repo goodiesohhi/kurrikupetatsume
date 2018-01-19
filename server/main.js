@@ -490,7 +490,7 @@ Meteor.methods({
       });
 		
 		
-		
+		throw new Meteor.Error("nogeld", "Not Enough Geld");
 	}
 
   },
