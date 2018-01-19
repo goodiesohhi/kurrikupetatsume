@@ -1267,17 +1267,17 @@ Template.petbox.onRendered ( function()
 	
     'click input.set': function(event) {
      
-	 var pet1=selected[0]
-	 var pet2=selected[1]
 	 
-	 if(!pet1||!pet2)
+	 
+	 if(!selected[0]||!selected[1])
 	 {
-		 
+		 console.log("error. invalid selection")
 	 } else {
 	 
       Meteor.call('createpair', selected[0],selected[1]);
-	   var pet=[]
-	   var selected=[]
+	   
+	   selected=[]
+	   toggle()
 	 
 	 
 	 }
