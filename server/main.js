@@ -391,12 +391,12 @@ Meteor.methods({
 	  var amountbase=100
 	  var count = cutethings.find({ "user": currentUser }).count()
 	  
-	  if (count > 100 && count < 250 )
+	  if (count > 50 && count < 150 )
 	  {
 	  amount = count* 10
 	  }
-	  else if (count > 250 ){
-	  amount = count* 50
+	  else if (count > 150 ){
+	  amount = count* 500
 	  }
 	  else if (count == 0 && Meteor.user().geld<200 ){
 	  amount = 1;

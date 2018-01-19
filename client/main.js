@@ -365,12 +365,12 @@ Meteor.popUp("popup2", result)
 	  console.log(count)
 	  
 	  
-	  if (count > 100 && count < 250 )
+	  if (count > 50 && count < 150 )
 	  {
 	  return count* 10
 	  }
-	  else if (count > 250 ){
-	  return count* 50
+	  else if (count > 150 ){
+	  return count* 500
 	  }
 	  else if (count == 0 && Meteor.user().geld<200 ){
 	  return 1;
