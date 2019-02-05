@@ -4,6 +4,7 @@ bunnyegg = {group:"leporine", dex:0,name:"Leporine Egg",evo:0,exp:0,max:200,rari
 bunnyball = {group:"leporine", dex:1, name:"Bunnyball",evo:2,exp:0,max:1200,rarity:1,gnumber:1};
 ballooney = {group:"leporine", dex:2, name:"Ballooney",evo:3,exp:0,max:2700,rarity:1,gnumber:1};
 rabblimp = {group:"leporine", dex:3, name:"Rabblimp",evo:'none',exp:0,max:NaN,rarity:1,gnumber:1};
+
 //reptile 
 reptileegg = {group:"reptile", dex:0,name:"Reptillian Egg",evo:0,exp:0,max:100,rarity:1,gnumber:2};
 
@@ -26,7 +27,12 @@ phish = {group:"fishies", dex:1,name:"Phish",evo:2,exp:0,max:120,rarity:1,gnumbe
 finposter = {group:"fishies", dex:2,name:"Finposter",evo:3,exp:0,max:8009,rarity:1,gnumber:4};
 ripoff = {group:"fishies", dex:3,name:"Ripoff",evo:'none',exp:0,max:NaN,rarity:1,gnumber:4};
 
-egggroup= [bunnyegg,reptileegg,avianegg,fishyegg]
+//felines
+felineegg = {group:"feline", dex:0,name:"Cat Egg?",evo:0,exp:0,max:150,rarity:1,gnumber:5};
+smolcat = {group:"feline", dex:1,name:"SmolCat",evo:2,exp:0,max:200,rarity:1,gnumber:5};
+catsizedcat = {group:"feline", dex:2,name:"Cat-Sized Cat",evo:3,exp:0,max:1200,rarity:1,gnumber:5};
+smolcat = {group:"feline", dex:3,name:"Big Cat",evo:'none',exp:0,max:NaN,rarity:1,gnumber:5};
+egggroup= [bunnyegg,reptileegg,avianegg,fishyegg,felineegg]
 //placements
 
 avian=[
@@ -81,11 +87,25 @@ reptile=[
 [serpentine,fanguine],
 ];
 
+feline=[
+//rare1
+[smolcat,],
+//rare2
+[smolcat,],
+//rare3
+[smolcat,],
+//rare4
+[smolcat,],
+//rare5
+[smolcat],
+];
 
 
 
 
-groups=[leporine,reptile,avian,fishies];
+
+
+groups=[leporine,reptile,avian,fishies,feline];
 
 
 //evos
@@ -113,8 +133,13 @@ evoavian=[
 avianegg,turken,grouster,peacockatrice,
 ];
 
+evofeline=[
+felineegg,smolcat,catsizedcat,bigcat,
+];
 
-evogroups=[evoleporine,evoreptile,evoavian,evofishies];
+
+
+evogroups=[evoleporine,evoreptile,evoavian,evofishies,evofeline];
 
 //petscripts
 
@@ -135,6 +160,7 @@ evogroups=[evoleporine,evoreptile,evoavian,evofishies];
   Fanguine: function () { return 1; },
   Turken: function () { return 1; },
   Phish: function () { return 1; },
+  smolcat: function () { return 1; },
 };
 
 function getRandomInt(min, max) {
