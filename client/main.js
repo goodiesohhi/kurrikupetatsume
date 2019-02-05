@@ -128,8 +128,8 @@ Register TEMPLATE
 */
 
 Template.myprofile.events({
-    'submit form': function(event){
-        event.preventDefault();
+    'submit form': function(e){
+        e.preventDefault();
 		var avatar = $('[name=avatar]').val();
 		 Meteor.call('profileset',avatar);
 		 Router.go("players");
@@ -144,8 +144,8 @@ Template.chat.onRendered( function () {
 })
 
 Template.chat.events({
-    'submit form': function(event){
-        event.preventDefault();
+    'submit form': function(e){
+        e.preventDefault();
 		var msg = $('[name=txtmsg]').val();
 		$(".msg").val(""); 
 		 Meteor.call('sendmsg',msg);
@@ -167,7 +167,7 @@ Template.register.onRendered(function(){
                 minlength: 6
             }
         },
-        submitHandler: function(event){
+        submitHandler: function(e){
             var email = $('[name=email]').val();
             var password = $('[name=password]').val();
 			var username = $('[name=username]').val();
@@ -188,8 +188,8 @@ Template.register.onRendered(function(){
     });
 });
 Template.register.events({
-    'submit form': function(event){
-        event.preventDefault();
+    'submit form': function(e){
+        e.preventDefault();
   
 	}
 });
@@ -201,8 +201,8 @@ NAV TEMPLATE
 
 
 Template.navigation.events({
-    'click .logout': function(event){
-        event.preventDefault();
+    'click .logout': function(e){
+        e.preventDefault();
         Meteor.logout();
         Router.go('login');
     }
@@ -212,8 +212,8 @@ Template.navigation.events({
 LOGIN TEMPLATE
 */
 Template.login.events({
-    'submit form': function(event){
-       event.preventDefault();
+    'submit form': function(e){
+       e.preventDefault();
     }
 });
 Template.login.onRendered(function(){
