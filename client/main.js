@@ -22,9 +22,9 @@ var options = {
 };  
 
 
-Template.popup.events({ "click .done": function(event){ $(event.target). trigger("popDown") } })
+Template.popup.events({ "click .done": function(e){ $(e.target). trigger("popDown") } })
 
-Template.popup2.events({ "click .done": function(event){ $(event.target). trigger("popDown") } })
+Template.popup2.events({ "click .done": function(e){ $(e.target). trigger("popDown") } })
 
 
 
@@ -217,10 +217,10 @@ Template.login.events({
     }
 });
 Template.login.onRendered(function(){
-	event.preventDefault();
+	
       var validator = $('.login').validate({
 		
-		submitHandler: function(event){
+		submitHandler: function(e){
 			 
         var email = $('[name=email]').val();
         var password = $('[name=password]').val();
@@ -244,7 +244,7 @@ Shop TEMPLATE
 */
 
   Template.shop.events({
-    'click input.buy': function(event) {
+    'click input.buy': function(e) {
     
 	
       Meteor.call('buy',100,0,NaN,function(error,result) {
@@ -319,7 +319,7 @@ Meteor.popUp("popup2", result)
 		
 		var thisuser=Meteor.users.findOne({}, {
       sort: {
-        'geld': -1,
+        'score': -1,
 		 
       },
 	   limit: 1
@@ -1046,7 +1046,7 @@ formatTime:function(time){
 	players:function () {
 		 return Meteor.users.find({}, {
       sort: {
-        'geld': -1
+        'score': -1
       }
     }).fetch();
 	},
@@ -1057,7 +1057,7 @@ labelClass: function (username) {
 		
 		var thisuser=Meteor.users.findOne({}, {
       sort: {
-        'geld': -1,
+        'score': -1,
 		 
       },
 	   limit: 1
@@ -1066,7 +1066,7 @@ labelClass: function (username) {
 	
 	var currentUser= Meteor.users.findOne({username:username}, {
       sort: {
-        'geld': -1,
+        'score': -1,
 		 
       },
 	   limit: 1
@@ -1112,7 +1112,7 @@ Template.players.helpers (
 		
      var champion = Meteor.users.findOne({}, {
       sort: {
-        'geld': -1,
+        'score': -1,
 		
       },
 	  
@@ -1127,7 +1127,7 @@ Template.players.helpers (
 	ischampion: function () {
 		var thisuser=Meteor.users.findOne({}, {
       sort: {
-        'geld': -1,
+        'score': -1,
 		 
       },
 	   limit: 1
@@ -1147,7 +1147,7 @@ Template.players.helpers (
 		
 		var thisuser=Meteor.users.findOne({}, {
       sort: {
-        'geld': -1,
+        'score': -1,
 		 
       },
 	   limit: 1
@@ -1185,7 +1185,7 @@ Template.players.helpers (
 	players:function () {
 		 return Meteor.users.find({}, {
       sort: {
-        'geld': -1
+        'score': -1
       }
     }).fetch();
 	},

@@ -9,6 +9,7 @@ const percent = require('percent');
 
     user.rank = "Fledgeling"
     user.geld = 100;
+	user.score=0;
     
     user.pets = 0;
     user.login =true;
@@ -70,7 +71,21 @@ Meteor.setInterval(function(){
 
 	Meteor.setInterval(function(){
 		deletechat()
-  passivegain();
+  //passivegain();
+  
+   Meteor.users.find( { "score" : { $exists: false } } ).map(function(user) {
+        Meteor.users.update({
+          _id: user._id
+        }, {
+          $set: {
+            'score': 0,
+            
+          },
+
+
+
+        })
+      });
   
 }, 60000);
 
@@ -222,9 +237,12 @@ Meteor.methods({
 		'recentid': derp,
 		'recentname': cfl(gen.group)+" Egg",
 		'recent': "/cutethings/"+gen.group+"/0.1",
+		 
 		
 		
 		}
+		
+		
 	})
 	
 	
@@ -358,7 +376,8 @@ Meteor.methods({
 	 
 	 
 	 
- 	  var geldgain = Math.ceil((100*Math.random())+100)
+ 	  var geldgain = Math.ceil((100*Math.random())+100);
+	  var scoreGain = 2**target.rarity;
 	  Meteor.users.update({
         _id: this.userId
       }, {
@@ -366,13 +385,15 @@ Meteor.methods({
           
           
           'geld': (geldgain), 
+		  'score': (scoreGain),
         },
 		 $set: {
-        'msg': "Evolution Succesful. "+next.name+" Get! + "+ geldgain + " Geld.",
+        'msg': "Evolution Succesful. "+next.name+" Get! + "+ geldgain + " Geld." +  "+" +scoreGain+ " Score!",
 		'recent': "/cutethings/"+next.group+"/"+next.dex+"."+target.forme,
 		'recentid': target._id,
 		'recentname': next.name,
 		'recentgain': geldgain,
+		'recentScore': scoreGain,
         
 
       },
@@ -602,7 +623,7 @@ function passivegain() {
           _id: user._id
         }, {
           $inc: {
-            'geld': 5,
+            'geld': 1,
             
           },
 
@@ -615,7 +636,7 @@ function passivegain() {
           _id: champ
         }, {
           $inc: {
-            'geld': -5,
+            'geld': 0,
             
           },
 

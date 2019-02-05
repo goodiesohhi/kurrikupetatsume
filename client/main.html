@@ -222,7 +222,7 @@ Users Online: {{usersOnlinecount}}
   <div class="col-sm-6">{{user.msg}}</div>
   
   {{else}}
-  <div class="col-sm-12"><h1>Not Logged In.</h1><br><input type="image" src="/cutethings/Leporine/1.1.png" /><a class="nav-link" href="{{pathFor route='login'}}">Login</a></div>
+  <div class="col-sm-12"><h1>Not logged in.</h1><br><input type="image" src="./cutethings/leporine/1.1.png" /><a class="nav-link" href="{{pathFor route='login'}}">Login</a></div>
   {{/if}}
   </div>
 </div>
@@ -313,7 +313,7 @@ Users Online: {{usersOnlinecount}}
         </button>
       </div>
       <div class="modal-body">
-        <img class="img-fluid" src="{{user.recent}}.png"> {{user.recentname}} get! + {{user.recentgain}} Geld. <br> <a class= "btn done btn-success" href= "/pets/{{user.recentid}}">View Pet</a>
+        <img class="img-fluid" src="{{user.recent}}.png"> {{user.recentname}} get! + {{user.recentgain}} Geld, + {{user.recentScore}} Score! <br> <a class= "btn done btn-success" href= "/pets/{{user.recentid}}">View Pet</a>
       </div>
       <div class="modal-footer">
         <button type="button" class="done btn btn-secondary" data-dismiss="modal">Close</button>
@@ -543,7 +543,7 @@ Champion:  <a href= "/users/{{champion}}">{{champion}}</a>
 	  
 	     <p class = "margin">
 		 {{#if ischampion}} <img class="img-fluid" id=""  src="/champ.png">  {{/if}}
-		 <a href= "/users/{{username}}"> {{username}}</a>   Rank: {{rank}}  &nbsp;  Geld: {{geld}}  &nbsp; {{#if ischampion}} <span class="champ">CHAMPION</span> {{/if}}  {{> avatar user=this shape="rounded"}} 
+		 <a href= "/users/{{username}}"> {{username}}</a>   Rank: {{rank}}  &nbsp;  Score: {{score}}  &nbsp; {{#if ischampion}} <span class="champ">CHAMPION</span> {{/if}}  {{> avatar user=this shape="rounded"}} 
 		
 		</p>
 		
