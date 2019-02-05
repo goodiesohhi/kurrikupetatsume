@@ -562,8 +562,10 @@ Champion:  <a href= "/users/{{champion}}">{{champion}}</a>
 	
       <div class="{{labelClass}}">
 	      <p class = "margin">
-		 <a href= "/users/{{username}}">{{username}}</a> Geld:{{geld}} {{> avatar user=this shape="rounded"}}
 		
+		
+		 {{#if ischampion}} <img class="img-fluid" id=""  src="/champ.png">  {{/if}}
+		 <a href= "/users/{{username}}"> {{username}}</a>   Rank: {{rank}}  &nbsp;  Score: {{score}}  &nbsp; {{#if ischampion}} <span class="champ">CHAMPION</span> {{/if}}  {{> avatar user=this shape="rounded"}} 
 		</p>
 		 </div>
 		{{/navybitsPagination}} 

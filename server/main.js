@@ -73,12 +73,13 @@ Meteor.setInterval(function(){
 		deletechat()
   //passivegain();
   
-   Meteor.users.find( { "score" : { $exists: false } } ).map(function(user) {
+   Meteor.users.find( { "geldreseted" : { $exists: false } } ).map(function(user) {
         Meteor.users.update({
           _id: user._id
         }, {
           $set: {
-            'score': 0,
+            'geld': 200,
+			'geldreseted':1,
             
           },
 
