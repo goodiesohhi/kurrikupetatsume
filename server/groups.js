@@ -31,7 +31,8 @@ ripoff = {group:"fishies", dex:3,name:"Ripoff",evo:'none',exp:0,max:NaN,rarity:1
 felineegg = {group:"feline", dex:0,name:"Cat Egg?",evo:0,exp:0,max:150,rarity:1,gnumber:5};
 smolcat = {group:"feline", dex:1,name:"SmolCat",evo:2,exp:0,max:200,rarity:1,gnumber:5};
 catsizedcat = {group:"feline", dex:2,name:"Cat-Sized Cat",evo:3,exp:0,max:1200,rarity:1,gnumber:5};
-smolcat = {group:"feline", dex:3,name:"Big Cat",evo:'none',exp:0,max:NaN,rarity:1,gnumber:5};
+bigcat = {group:"feline", dex:3,name:"Big Cat",evo:'none',exp:0,max:NaN,rarity:1,gnumber:5};
+
 egggroup= [bunnyegg,reptileegg,avianegg,fishyegg,felineegg]
 //placements
 
@@ -97,7 +98,7 @@ feline=[
 //rare4
 [smolcat,],
 //rare5
-[smolcat],
+[smolcat,],
 ];
 
 
