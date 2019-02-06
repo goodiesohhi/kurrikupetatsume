@@ -107,6 +107,7 @@ feline=[
 
 
 groups=[leporine,reptile,avian,fishies,feline];
+groupnames=["leporine","reptile","avian","fishies","feline"];
 
 
 //evos
@@ -161,7 +162,7 @@ evogroups=[evoleporine,evoreptile,evoavian,evofishies,evofeline];
   Fanguine: function () { return 1; },
   Turken: function () { return 1; },
   Phish: function () { return 1; },
-  smolcat: function () { return 1; },
+  SmolCat: function () { return 1; },
 };
 
 function getRandomInt(min, max) {

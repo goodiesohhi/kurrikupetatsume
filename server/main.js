@@ -72,7 +72,7 @@ Meteor.setInterval(function(){
 	Meteor.setInterval(function(){
 		deletechat()
   //passivegain();
-  
+  console.log(getRandomInt(1,groups.length))
    Meteor.users.find( { "geldreseted" : { $exists: false } } ).map(function(user) {
         Meteor.users.update({
           _id: user._id
@@ -89,6 +89,15 @@ Meteor.setInterval(function(){
       });
   
 }, 60000);
+
+
+	Meteor.setInterval(function(){
+		temp = getRandomInt(1,groups.length)
+  console.log(temp)
+  console.log(groupnames[temp-1])
+  
+  
+}, 2000);
 
 
 chat.remove({}, {
@@ -435,7 +444,7 @@ Meteor.methods({
 		
 		if(isNaN(group)) {
 			group= getRandomInt(1,groups.length)
-			
+			console.log("bought "+groupnames[group-1])
 		}
     
     if (Meteor.user().geld >= amount && amount > 0){
