@@ -79,7 +79,7 @@ Meteor.setInterval(function(){
   
  
   
-}, 60000);
+}, 100000);
 
 
 	Meteor.setInterval(function(){
