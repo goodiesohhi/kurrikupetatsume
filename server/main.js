@@ -62,6 +62,10 @@ const percent = require('percent');
 });
 
 
+function randInt(min, max) {
+  return Math.floor(Math.random() * (max - min) ) + min;
+}
+
 Meteor.startup(() => {
 
 Meteor.setInterval(function(){
@@ -71,15 +75,24 @@ Meteor.setInterval(function(){
 
 	Meteor.setInterval(function(){
 		deletechat()
-  //passivegain();
-  console.log(getRandomInt(1,groups.length))
-   Meteor.users.find( { "geldreseted" : { $exists: false } } ).map(function(user) {
-        Meteor.users.update({
-          _id: user._id
+  passivegain();
+  
+ 
+  
+}, 60000);
+
+
+	Meteor.setInterval(function(){
+
+	
+	 cutethings.find( { "sc" : { $exists: false } } ).map(function(pet) {
+	  number = randInt(1,999);
+        cutethings.update({
+          _id: pet._id
         }, {
           $set: {
-            'geld': 200,
-			'geldreseted':1,
+            'sc': number,
+			
             
           },
 
@@ -88,16 +101,8 @@ Meteor.setInterval(function(){
         })
       });
   
-}, 60000);
-
-
-	Meteor.setInterval(function(){
-		temp = getRandomInt(1,groups.length)
-  console.log(temp)
-  console.log(groupnames[temp-1])
   
-  
-}, 2000);
+}, 10000);
 
 
 chat.remove({}, {
@@ -199,6 +204,7 @@ Meteor.methods({
 		 {throw new Meteor.Error ('illegalrequest',"Nice Try.")};
 	  
 	  var champion = Meteor.users.findOne({}, {
+		  
       sort: {
         'geld': -1,
 		
@@ -207,15 +213,28 @@ Meteor.methods({
 	  limit: 1
 	  
     })._id
+	var rare =0;
+	var chain =0;
 	if (currentUser== champion){
-		 var rare=eggrarity(pair.chain*2)-1
+		 rare=eggrarity(pair.chain*2)-1
+		 chain=pair.chain*2
 	} else{
-	  	  var rare=eggrarity(pair.chain)-1
+	  	  
+		  rare=eggrarity(pair.chain)-1
+		  chain=pair.chain
 	}
 		  
 		  var egggroup2 = []
 		  egggroup2.push(cutethings.findOne( {_id:pair.pet1 } ).groupnumber)
 		  egggroup2.push(cutethings.findOne( {_id:pair.pet2 } ).groupnumber)
+		  supercompatability = false;
+		  if ((cutethings.findOne( {_id:pair.pet1 } ).sc==cutethings.findOne( {_id:pair.pet2 } ).sc-1)||(cutethings.findOne( {_id:pair.pet1 } ).sc-1==cutethings.findOne( {_id:pair.pet2 } ).sc)||cutethings.findOne( {_id:pair.pet1 } ).sc==cutethings.findOne( {_id:pair.pet2 } ).sc){
+			  supercompatability = true;
+		  }
+		  
+		  if (supercompatability){
+		  rare=eggrarity(chain*5)-1
+	} 
 		  gengroup= egggroup2[getRandomInt(0,1)]
 	
 	  var gen= groups[gengroup-1][rare][getRandomInt(0, groups[gengroup-1][rare].length-1)]

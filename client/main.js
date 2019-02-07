@@ -754,6 +754,7 @@ Template.mypets.helpers({
 	 
  },
  
+ 
  canevolve:function(data,data2){
 	 return data>=data2;
  },
@@ -998,6 +999,13 @@ Template.petpage.helpers({
 	 
  },
  
+ generateHash:function(data) {
+	 hexString = data.toString(16);
+if (hexString.length % 2) {
+  hexString = '0' + hexString;
+}
+return hexString
+ },
  canevolve:function(data,data2){
 	 return data>=data2;
  },
