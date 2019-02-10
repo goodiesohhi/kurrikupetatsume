@@ -374,10 +374,78 @@ Users Online: {{usersOnlinecount}}
 
 <template name="profile">
 
-{{#navybitsPagination data=viewpet perPage=3}}
+
+<div class="panel panel-default">
+<div class="panel-heading">
+<ul class="nav nav-tabs">
+<li class="active"><a data-toggle="tab" href="#eggs">Eggs</a></li>
+  <li><a data-toggle="tab" href="#common">Commons</a></li>
+  <li><a data-toggle="tab" href="#slc">Slightly Less Common</a></li>
+  <li><a data-toggle="tab" href="#rare">"Rare"</a></li>
+  <li><a data-toggle="tab" href="#suprare">Super Rare</a></li>
+  <li><a data-toggle="tab" href="#secrare">Secret Rare</a></li>
+</ul>
+</div>
+<div class ="panel-body">
+<div class="tab-content">
+  <div id="eggs" class="tab-pane fade in active">
+    <h3>Eggs</h3>
+    
+ 
+    {{#navybitsPagination data=eggs perPage=3}}
+	
+	{{>petbox}}
+
+		{{/navybitsPagination}}     
+
+	  
+	  
+  </div>
+  <div id="common" class="tab-pane fade">
+    <h3>Commons</h3>
+    
+ 
+    {{#navybitsPagination data=commonpet perPage=3}}
+	
+	{{>petbox}}
+
+		{{/navybitsPagination}}     
+
+	  
+	  
+  </div>
+  <div id="slc" class="tab-pane fade">
+    <h3>Slightly Less Commons</h3>
+   {{#navybitsPagination data=slcpet perPage=3}}
+	 {{>petbox}}
+		{{/navybitsPagination}}     
+  </div>
+  <div id="rare" class="tab-pane fade">
+    <h3>"Rares"</h3>
+{{#navybitsPagination data=rarepet perPage=3}}
 	
       {{>petbox}}
-		{{/navybitsPagination}}   
+		{{/navybitsPagination}}     
+  </div>
+  <div id="suprare" class="tab-pane fade">
+    <h3>Super Rare</h3>
+    {{#navybitsPagination data=suppet perPage=3}}
+	{{>petbox}}
+		{{/navybitsPagination}}     
+  </div>
+  <div id="secrare" class="tab-pane fade">
+    <h3>Secret Rare</h3>
+   {{#navybitsPagination data=secpet perPage=3}}
+	
+     {{>petbox}}
+		{{/navybitsPagination}}     
+	    
+  </div>
+</div>
+</div>
+
+	  
+</div> 
 </template>
 
 <template name="petpage">

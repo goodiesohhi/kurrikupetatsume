@@ -542,45 +542,6 @@ Template.profile.onRendered(function(){
 	   
    
 });
-Template.profile.helpers({
-	viewpet:function(user){
-		
-		 var username=Router.current().params.username;
-		
-		 var id=  Meteor.users.findOne({
-            username:username
-        })._id;
-		
-		var common=cutethings.find({
-      "user": id,
-	  
-    }).fetch();
-	
-	
-	
-	 
-	
-	return common
-	},
-	
-	thisuser:function(user){
-		
-		 var username=Router.current().params.username;
-		
-		 return  Meteor.users.findOne({ username:username });
-		
-		
-	},
-	
-	
-	
-	 user:function(){
-		    return Meteor.user();
-	  },
- 
- 
-	
-});
 
 Template.Breeding.helpers({
 	
@@ -683,6 +644,146 @@ isselected:function(id){
  
  
 	
+});
+Template.profile.helpers({
+		user:function(){
+		    return Meteor.user();
+	  },
+	  	thisuser:function(user){
+		
+		 var username=Router.current().params.username;
+		
+		 return  Meteor.users.findOne({ username:username });
+		
+		
+	},
+	
+	  	viewpet:function(user){
+			
+		
+		 var username=Router.current().params.username;
+		
+		 var id=  Meteor.users.findOne({
+            username:username
+        })._id;
+		
+		var common=cutethings.find({
+      "user": id,
+	  
+    }).fetch();
+	
+		},
+ 
+	
+ eggs:function(){
+	 
+			 var username=Router.current().params.username;
+		
+		 var id=  Meteor.users.findOne({
+            username:username
+        })._id;
+		
+	
+    eggs=cutethings.find({
+      "user": id,
+	  
+	   'dex':0
+    }).fetch();
+   
+    
+
+	
+	return eggs
+ },
+ commonpet:function(){
+	 		 var username=Router.current().params.username;
+		
+		 var id=  Meteor.users.findOne({
+            username:username
+        })._id;
+		
+
+	 common=cutethings.find({
+      "user": id,
+	  'rarity': 1,
+	   'dex': {$gt: 0}
+    }).fetch();
+	return common
+ },
+  slcpet:function(){
+     		 var username=Router.current().params.username;
+		
+		 var id=  Meteor.users.findOne({
+            username:username
+        })._id;
+		
+	
+    return cutethings.find({
+      "user": id,
+	  'rarity': 2,
+	      'dex': {$gt: 0}
+    }).fetch();
+ },
+  rarepet:function(){
+     		 var username=Router.current().params.username;
+		
+		 var id=  Meteor.users.findOne({
+            username:username
+        })._id;
+		
+
+		
+    return cutethings.find({
+      "user": id,
+	  'rarity': 3,
+	     'dex': {$gt: 0}
+    }).fetch();
+ },
+  suppet:function(){
+    		 var username=Router.current().params.username;
+		
+		 var id=  Meteor.users.findOne({
+            username:username
+        })._id;
+		
+    return cutethings.find({
+      "user": id,
+	  'rarity': 4,
+	     'dex': {$gt: 0}
+    }).fetch();
+	
+ },
+  secpet:function(){
+    		 var username=Router.current().params.username;
+		
+		 var id=  Meteor.users.findOne({
+            username:username
+        })._id;
+		
+    return cutethings.find({
+      "user": id,
+	  'rarity': 5,
+	     'dex': {$gt: 0}
+    }).fetch();
+ },
+ 
+ isegg:function(getdata){
+	 
+	return getdata === 0
+	
+	 
+ },
+ 
+ 
+ canevolve:function(data,data2){
+	 return data>=data2;
+ },
+ 
+  notnumber:function(data){
+	 return data=NaN;
+ }
+ 
+ 
 });
 
 Template.mypets.helpers({
